@@ -1,6 +1,9 @@
 package ui.controller;
 
 import db.EwsReservationsDb;
+import domain.Klant;
+import meetingrooms.Service;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,6 +80,9 @@ public class Servlet extends HttpServlet {
                     case "current":
                             doel = current(request, response);
                             break;
+                    case "overview":
+                    	doel = overview(request, response);
+                    	break;
                     default:
                         doel = "index.html";
                     }
@@ -106,6 +112,15 @@ public class Servlet extends HttpServlet {
             Logger.getLogger(Servlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "currentoccupation.jsp";
+    }
+    
+    private String overview(HttpServletRequest request, HttpServletResponse response) {
+    	
+    	Service service = new Service();
+    	List<Klant> klanten = service.printAppointmentsvoorWeb();
+    	service.printAppointmentsvoorWeb();
+    	request.setAttribute("klanten", klanten);
+    	return "Lokaaloverview.jsp";
     }
 		
 }
