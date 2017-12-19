@@ -45,8 +45,8 @@ public class LokaalSQLDb {
 		if(result.next()){
 		String lokaalid = result.getString("lokaalid");
 		String naam = result.getString("naam");
-		int stopcontact = result.getInt("password");
-		int stoelen = result.getInt("password");
+		int stopcontact = result.getInt("stopcontact");
+		int stoelen = result.getInt("stoelen");
 		boolean status = result.getBoolean("status");
 		Lokaal lokaal = new Lokaal(lokaalid, naam, stopcontact, stoelen, status);
 		return lokaal;
@@ -66,23 +66,22 @@ public class LokaalSQLDb {
 		return null;	
 	}
 
-	/*
+	
 	public List<Lokaal> getAll() {
-		List<Lokaal> personen = new ArrayList<Lokaal>();
+		List<Lokaal> lokalen = new ArrayList<Lokaal>();
 		
 		try {
 			connection = DriverManager.getConnection(url, properties);
 			statement = connection.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM person");
+			ResultSet result = statement.executeQuery("SELECT * FROM lokaal");
 			while(result.next()){
-				String userid = result.getString("userid");
-				String email = result.getString("email");
-				String password = result.getString("password");
-				String firstname = result.getString("firstname");
-				String lastname = result.getString("lastname");
-				String salt = result.getString("salt");
-				Person person = new Person(userid, email,password, firstname, lastname, salt);
-				personen.add(person);
+				String lokaalid = result.getString("lokaalid");
+				String naam = result.getString("naam");
+				int stopcontact = result.getInt("stopcontact");
+				int stoelen = result.getInt("stoelen");
+				boolean status = result.getBoolean("status");
+				Lokaal lokaal = new Lokaal(lokaalid, naam, stopcontact, stoelen, status);
+				lokalen.add(lokaal);
 			
 			}
 		} catch (SQLException e) {
@@ -97,23 +96,22 @@ public class LokaalSQLDb {
 				throw new DbException(e.getMessage(), e);
 			}	
 		}
-		return personen;
+		return lokalen;
 		
 	}
 
 	public void add(Lokaal lokaal) {
-		String sql = "INSERT INTO r0652815_natest.person (userid, email, password, firstname, lastname, salt)" + " VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO groep6.lokaal (lokaalid, naam, stopcontact, stoelen, status)" + " VALUES(?,?,?,?,?)";
 		try{
 			connection = DriverManager.getConnection(url, properties);
 			statement1 = connection.prepareStatement(sql);
 			
-			statement1.setString(1, person.getUserid());
-			statement1.setString(2, person.getEmail());
-			statement1.setString(3, person.getPassword());
-			statement1.setString(4, person.getFirstName());
-			statement1.setString(5, person.getLastName());
-			statement1.setString(6, person.getSalt());
-			
+			statement1.setString(1, lokaal.getLokaalID());
+			statement1.setString(2, lokaal.getNaam());
+			statement1.setInt(3, lokaal.getStopcontact());
+			statement1.setInt(4, lokaal.getStoelen());
+			statement1.setBoolean(5, lokaal.isStatus());
+				
 			statement1.execute();
 		} catch (SQLException exc){
 			throw new DbException(exc.getMessage(), exc);
@@ -131,38 +129,12 @@ public class LokaalSQLDb {
 		
 	}
 		
-		
-
-//overbodig maar kan handig zijn
-	
-	public void update(Person person) {
-		if(person == null){
-			throw new DbException("No person given");
-		}
-		try{
-			connection = DriverManager.getConnection(url, properties);
-			statement = connection.createStatement();
-			statement.executeUpdate("Update person SET userid= '" + person.getUserid() + "', email='" + person.getEmail() + "', password=" + person.getPassword() + "', firstname=" + person.getFirstName() + "', lastname=" + person.getLastName() + " where userid = "+ person.getUserid());
-	}
-		catch(SQLException e){
-			throw new DbException(e.getMessage(), e);
-		}
-		finally{
-			try {
-				connection.close();
-				statement.close();
-			} catch (SQLException e) {
-				throw new DbException(e.getMessage(), e);
-			}	
-		}
-		
-	}
 	
 	public void delete(String id) {
 		try{
 			connection = DriverManager.getConnection(url, properties);
 			statement = connection.createStatement();
-			statement.executeUpdate("DELETE FROM r0652815_natest.person WHERE userid = '" + id + "'");
+			statement.executeUpdate("DELETE FROM groep6 WHERE lokaalid = '" + id + "'");
 		}
 		catch(SQLException e){
 			throw new DbException(e.getMessage(), e);
@@ -177,5 +149,5 @@ public class LokaalSQLDb {
 		}
 		
 	}
-	*/
+	
 }

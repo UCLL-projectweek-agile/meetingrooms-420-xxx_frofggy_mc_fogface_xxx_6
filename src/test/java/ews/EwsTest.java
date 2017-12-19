@@ -7,6 +7,7 @@ package ews;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.PropertySet;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
@@ -38,8 +39,7 @@ public class EwsTest {
 
     private static void logIn() throws Exception {
         // user with read access for room information
-        ExchangeCredentials credentials
-                = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
+        ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
         //user gets privileges of room
         ImpersonatedUserId impersonatedUserId = new ImpersonatedUserId(ConnectingIdType.SmtpAddress, room);
         service.setImpersonatedUserId(impersonatedUserId);
