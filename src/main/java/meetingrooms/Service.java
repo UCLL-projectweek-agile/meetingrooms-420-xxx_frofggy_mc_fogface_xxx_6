@@ -171,5 +171,20 @@ public class Service {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    public void printLokaal(String r) {
+        
+        
+        ExchangeService service = new ExchangeService();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date startDate = new Date();
+        Date endDate = new Date();
+        endDate.setTime(endDate.getTime() + 3600000);
+        
+        try{
+            logIn(r, service);
+            findAppointments(r, service, startDate, endDate);
+        }catch (Exception e){
+            
+        }
+    }
 }
