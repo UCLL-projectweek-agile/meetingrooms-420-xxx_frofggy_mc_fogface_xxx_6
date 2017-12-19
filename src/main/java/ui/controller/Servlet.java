@@ -64,7 +64,4 @@ public class Servlet extends HttpServlet {
 		return "Lokaaloverview.jsp";
 	}
 		
-		
-	}
-
 }
