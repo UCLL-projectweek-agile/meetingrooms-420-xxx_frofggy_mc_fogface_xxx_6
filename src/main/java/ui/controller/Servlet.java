@@ -1,6 +1,8 @@
 package ui.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +41,28 @@ public class Servlet extends HttpServlet {
 	}
 	
 	protected void verwerk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String action = request.getParameter("action");
+		String doel = "index.jsp";	
+		
+		if (action != null){
+		switch(action){
+		case "check":
+			doel = check(request, response);
+			break;
+		
+		}
+		}
+		request.setAttribute("paginawaarden", doel);
+		RequestDispatcher rd = request.getRequestDispatcher(doel);
+		rd.forward(request, response);
+		
+	}
+	
+	public String check(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		return "Lokaaloverview.jsp";
+	}
 		
 		
 	}
