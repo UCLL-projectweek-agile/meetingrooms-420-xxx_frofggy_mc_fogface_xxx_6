@@ -1,6 +1,9 @@
 package meetingrooms;
 
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,6 +72,28 @@ public class Service {
         System.out.println("---------------------------------");
     }
     
+    public String stringFindAppointments(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
+        
+        String appointment = "";
+        Mailbox mailbox = new Mailbox(room);
+        FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
+        CalendarFolder calendarFolder = CalendarFolder.bind(service, folderId);
+        //read calendar of room
+        CalendarView calendarView = new CalendarView(startDate, endDate);
+        FindItemsResults<Appointment> findResults
+                = calendarFolder.findAppointments(calendarView);
+        appointment += "---------------------------------\n";
+        appointment += "Room: "+room + "\n";
+        for (Appointment appt : findResults.getItems()) {
+            appt.load(PropertySet.FirstClassProperties);
+            appointment += "SUBJECT: " + appt.getSubject() + "\n";
+            appointment += "FROM: " + appt.getStart() + "\n";
+            appointment += "TILL: " + appt.getEnd() + "\n";
+        }
+        appointment += "---------------------------------";
+        return appointment;
+    }
+    
     public void printAppointmentsNow(){
         rooms.add("HSR-Yangtze@ucll.be");
         rooms.add("HSR-Schelde@ucll.be");
@@ -99,6 +124,13 @@ public class Service {
         }
     }
     public void printAppointmentsToday(){
+		PrintWriter p = null;
+		try{
+			p = new PrintWriter("DagSchema.txt", "UTF-8");
+		} catch (FileNotFoundException | UnsupportedEncodingException e1) {
+			System.out.println(e1.getMessage());
+		}
+		
         rooms.add("HSR-Yangtze@ucll.be");
         rooms.add("HSR-Schelde@ucll.be");
         rooms.add("HSR-Sarine@ucll.be");
@@ -127,11 +159,12 @@ public class Service {
         for(String r : rooms){
             try{
                 logIn(r, service);
-                findAppointments(r, service, startDate, endDate);
+                p.write(stringFindAppointments(r, service, startDate, endDate));          
             }catch (Exception e){
                 
             }
         }
+        p.close();
     }
     
     
