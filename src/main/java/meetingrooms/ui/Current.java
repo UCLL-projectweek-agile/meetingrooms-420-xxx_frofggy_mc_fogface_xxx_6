@@ -5,6 +5,7 @@
  */
 package meetingrooms.ui;
 
+import domain.Appointment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -35,7 +36,8 @@ public class Current extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<?> appointments = service.getCurrentAppointments();
+        List<Appointment> appointments = service.getCurrentAppointments();
+        request.setAttribute(name, this);
         request.getRequestDispatcher("currentoccupation.jsp").forward(request, response);
     }
 
