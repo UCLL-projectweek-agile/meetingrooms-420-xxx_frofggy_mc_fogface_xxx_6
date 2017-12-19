@@ -1,6 +1,7 @@
 package meetingrooms;
 
 
+import db.EwsReservationsDb;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -10,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 import domain.Klant;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.PropertySet;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
@@ -40,6 +43,23 @@ public class Service {
     private ExchangeService service = new ExchangeService();
 
     private List<String> rooms = new ArrayList<>();
+    private final EwsReservationsDb db;
+    
+    public Service(){
+        rooms.add("HSR-Yangtze@ucll.be");
+        rooms.add("HSR-Schelde@ucll.be");
+        rooms.add("HSR-Sarine@ucll.be");
+        rooms.add("HSR-Rhone@ucll.be");
+        rooms.add("HSR-Po@ucll.be");
+        rooms.add("HSR-Ebro@ucll.be");
+        rooms.add("HSR-Maas@ucll.be");
+        rooms.add("HSR-Douro@ucll.be");
+        rooms.add("HSR-Donau@ucll.be");
+        rooms.add("HSR-Chao-Praya@ucll.be");
+        rooms.add("HSR-Arno@ucll.be");
+        ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
+        db = new EwsReservationsDb(rooms, credentials);
+    }
     
     public void logIn(String room, ExchangeService service) throws Exception {
         // user with read access for room information
@@ -249,5 +269,14 @@ public class Service {
         }catch (Exception e){
             
         }
+    }
+
+    public List<domain.Appointment> findAllAppointments(Date startDate, Date endDate) {
+        try {
+            return db.findAllAppointments(startDate, endDate);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<domain.Appointment>();
     }
 }

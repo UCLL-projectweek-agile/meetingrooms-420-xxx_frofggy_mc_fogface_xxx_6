@@ -87,9 +87,17 @@ public class Servlet extends HttpServlet {
                         doel = "index.html";
                     }
 		}
-		request.setAttribute("paginawaarden", doel);
 		RequestDispatcher rd = request.getRequestDispatcher(doel);
 		rd.forward(request, response);
+                /*
+                String req = request.getParameter("action");
+		try{
+			RequestHandler rq = this.requestHandlerFactory.create(req);
+			rq.handle(request, response);
+		}catch(Exception e) {
+                    e.printStackTrace();
+		}
+                */
 		
 	}
 	
