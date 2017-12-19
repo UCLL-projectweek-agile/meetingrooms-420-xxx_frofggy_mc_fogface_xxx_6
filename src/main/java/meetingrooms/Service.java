@@ -152,6 +152,39 @@ public class Service {
             }
         }
     }
+    
+    public List<Klant> printAppointmentsvoorWeb(){
+        rooms.add("HSR-Yangtze@ucll.be");
+        rooms.add("HSR-Schelde@ucll.be");
+        rooms.add("HSR-Sarine@ucll.be");
+        rooms.add("HSR-Rhone@ucll.be");
+        rooms.add("HSR-Po@ucll.be");
+        rooms.add("HSR-Ebro@ucll.be");
+        rooms.add("HSR-Maas@ucll.be");
+        rooms.add("HSR-Douro@ucll.be");
+        rooms.add("HSR-Donau@ucll.be");
+        rooms.add("HSR-Chao-Praya@ucll.be");
+        rooms.add("HSR-Arno@ucll.be");
+        
+        
+        ExchangeService service = new ExchangeService();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date startDate = new Date();
+        Date endDate = new Date();
+        endDate.setTime(endDate.getTime() + 3600000);
+        List<Klant> klanten = new ArrayList<>();
+        
+        for(String r : rooms){
+            try{
+                logIn(r, service);
+                klanten = findAppointments2(r, service, startDate, endDate);
+            }catch (Exception e){
+                
+            }
+        }
+        return klanten;
+    }
+    
     public void printAppointmentsToday(){
 		PrintWriter p = null;
 		try{
@@ -196,9 +229,6 @@ public class Service {
         p.close();
     }
     
-    public List<String> appointmentStartAndEnd(String room, ExchangeService service, Date startDate, Date endDate){
-    	return null;
-    }
 
     public List<domain.Appointment> getCurrentAppointments() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

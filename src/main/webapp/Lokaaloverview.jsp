@@ -37,10 +37,11 @@
 				<th>23</th>
 			</tr>
 
-			<c:forEach var="lokaal" items="${lokaal}">
+			<c:forEach var="klant" items="${klanten}">
 
 				<tr>
 					<td>${klant.naam}</td>
+
 					<td></td>
 				</tr>
 
