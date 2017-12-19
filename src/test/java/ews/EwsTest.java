@@ -7,6 +7,7 @@ package ews;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.PropertySet;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
@@ -26,8 +27,8 @@ import microsoft.exchange.webservices.data.search.FindItemsResults;
  * @author Daan
  */
 public class EwsTest {
-
-    private static ExchangeService service = new ExchangeService();
+	
+	private static ExchangeService service = new ExchangeService();
 
     private static String room ="HSR-Douro@ucll.be";
     

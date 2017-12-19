@@ -13,7 +13,8 @@ public class Application {
 
      public static void main(String[] args) throws Exception {
          Service service = new Service();
-         service.printAppointmentsNow();
+        //service.printAppointmentsNow();
+         service.printAppointmentsToday();
     }
     
 }
