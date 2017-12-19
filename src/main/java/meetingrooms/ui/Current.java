@@ -5,16 +5,23 @@
  */
 package meetingrooms.ui;
 
-import domain.Appointment;
+import db.EwsReservationsDb;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import meetingrooms.Service;
+import microsoft.exchange.webservices.data.core.service.item.Appointment;
+import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
+import microsoft.exchange.webservices.data.credential.WebCredentials;
 
 /**
  *
@@ -36,8 +43,33 @@ public class Current extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Appointment> appointments = service.getCurrentAppointments();
-        request.setAttribute("appointments", appointments);
+        List<String> rooms = new ArrayList<>();
+        rooms.add("HSR-Yangtze@ucll.be");
+        rooms.add("HSR-Schelde@ucll.be");
+        rooms.add("HSR-Sarine@ucll.be");
+        rooms.add("HSR-Rhone@ucll.be");
+        rooms.add("HSR-Po@ucll.be");
+        rooms.add("HSR-Ebro@ucll.be");
+        rooms.add("HSR-Maas@ucll.be");
+        rooms.add("HSR-Douro@ucll.be");
+        rooms.add("HSR-Donau@ucll.be");
+        rooms.add("HSR-Chao-Praya@ucll.be");
+        rooms.add("HSR-Arno@ucll.be");
+        ExchangeCredentials credentials
+                = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
+        EwsReservationsDb db = new EwsReservationsDb(rooms, credentials);
+        
+        Date startDate = new Date();
+        Date endDate = new Date();
+        endDate.setTime(endDate.getTime() + 3600000);
+        List<Appointment> appointments;
+        try {
+            appointments = db.findAppointments("HSR-Yangtze@ucll.be", startDate, endDate);
+            request.setAttribute("appointments", appointments);
+        } catch (Exception ex) {
+            Logger.getLogger(Current.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         request.getRequestDispatcher("currentoccupation.jsp").forward(request, response);
     }
 
