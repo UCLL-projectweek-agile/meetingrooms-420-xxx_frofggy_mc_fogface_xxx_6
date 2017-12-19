@@ -89,6 +89,7 @@ public class Service {
             appointment += "SUBJECT: " + appt.getSubject() + "\n";
             appointment += "FROM: " + appt.getStart() + "\n";
             appointment += "TILL: " + appt.getEnd() + "\n";
+            
         }
         appointment += "---------------------------------";
         return appointment;
@@ -165,6 +166,10 @@ public class Service {
             }
         }
         p.close();
+    }
+    
+    public List<String> appointmentStartAndEnd(String room, ExchangeService service, Date startDate, Date endDate){
+    	return null;
     }
 
     public List<domain.Appointment> getCurrentAppointments() {

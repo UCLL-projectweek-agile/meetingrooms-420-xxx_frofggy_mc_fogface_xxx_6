@@ -6,17 +6,15 @@ public class Lokaal {
 	private String naam;
 	private int stopcontact;
 	private int stoelen;
-	private boolean status;
-	private boolean[] lokaalbezetting = new boolean[17]; 
-	
-	public Lokaal(String lokaalID, String naam, int stopcontact, int stoelen, boolean status) {
+	private boolean[] lokaalbezetting = new boolean[24];
+
+	public Lokaal(String lokaalID, String naam, int stopcontact, int stoelen) {
 		this.setLokaalID(naam);
 		this.setNaam(naam);
 		this.setStopcontact(stopcontact);
 		this.setStoelen(stoelen);
-		this.setStatus(status);
 	}
-	
+
 	public boolean[] getLokaalbezetting() {
 		return lokaalbezetting;
 	}
@@ -36,31 +34,30 @@ public class Lokaal {
 	public String getNaam() {
 		return naam;
 	}
+
 	public void setNaam(String naam) {
 		this.naam = naam;
 	}
+
 	public int getStopcontact() {
 		return stopcontact;
 	}
+
 	public void setStopcontact(int stopcontact) {
 		this.stopcontact = stopcontact;
 	}
+
 	public int getStoelen() {
 		return stoelen;
 	}
+
 	public void setStoelen(int stoelen) {
 		this.stoelen = stoelen;
 	}
-	public boolean isStatus() {
-		return status;
+
+	@Override
+	public String toString() {
+		return naam;
 	}
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-	
-        @Override
-        public String toString(){
-            return naam;
-        }
-	
+
 }
