@@ -16,8 +16,6 @@
         
         
  	<div class="panel-footer">
- 
-        <p>&copy; Company | Privacy | Terms</p>
- 
-      </div>
+		<p>&copy; Company | Privacy | Terms</p>
+	</div>
 </body>
