@@ -1,21 +1,39 @@
-<%-- 
-    Document   : currentoccupation
-    Created on : Dec 19, 2017, 1:22:17 PM
-    Author     : Daan
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-        <c:forEach var="appointment" items="${appointments}">
+<%@page import="domain.*"%>
+<%@page import="db.*"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<html lang="en">
+<head>
+  <title>Lokalen</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/6a6b824a28.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Reservatie lokalen</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="Servlet?action=current">Overzicht</a></li>
+      <li><a href="#">Reserveer</a></li>
+      <li><a href="#">Registreer</a></li>
+    </ul>
+  </div>
+</nav>
+		 <h1>Lokalen nu bezet:</h1>
+		<c:forEach var="appointment" items="${appointments}">
             <p>${appointment}</p>
         </c:forEach>
-    </body>
-</html>
+ 	<div class="panel-footer">
+ 
+        <p>&copy; Company | Privacy | Terms</p>
+ 
+      </div>
+</body>
