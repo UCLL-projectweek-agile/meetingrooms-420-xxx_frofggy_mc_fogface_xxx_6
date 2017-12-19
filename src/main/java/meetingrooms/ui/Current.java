@@ -37,7 +37,7 @@ public class Current extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Appointment> appointments = service.getCurrentAppointments();
-        request.setAttribute(name, this);
+        request.setAttribute("appointments", appointments);
         request.getRequestDispatcher("currentoccupation.jsp").forward(request, response);
     }
 
