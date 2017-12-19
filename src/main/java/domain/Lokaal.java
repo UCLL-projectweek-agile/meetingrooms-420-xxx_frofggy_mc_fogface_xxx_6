@@ -58,5 +58,9 @@ public class Lokaal {
 		this.status = status;
 	}
 	
+        @Override
+        public String toString(){
+            return naam;
+        }
 	
 }

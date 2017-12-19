@@ -6,6 +6,7 @@
 package meetingrooms.ui;
 
 import db.EwsReservationsDb;
+import domain.Lokaal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -63,9 +64,10 @@ public class Current extends HttpServlet {
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
         List<Appointment> appointments;
+        List<domain.Appointment> appoints = new ArrayList<>();
         try {
-            appointments = db.findAppointments("HSR-Yangtze@ucll.be", startDate, endDate);
-            request.setAttribute("appointments", appointments);
+            appoints = db.findAllAppointments(startDate, endDate);
+            request.setAttribute("appointments", appoints);
         } catch (Exception ex) {
             Logger.getLogger(Current.class.getName()).log(Level.SEVERE, null, ex);
         }
