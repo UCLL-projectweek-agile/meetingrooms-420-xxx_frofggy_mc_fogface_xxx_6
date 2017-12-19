@@ -148,7 +148,7 @@ public class Service {
 		}
 	}
 
-	public List<Klant> printAppointmentsvoorWeb() {
+	public List<List<Klant>> printAppointmentsvoorWeb() {
 		rooms.add("HSR-Yangtze@ucll.be");
 		rooms.add("HSR-Schelde@ucll.be");
 		rooms.add("HSR-Sarine@ucll.be");
@@ -166,17 +166,17 @@ public class Service {
 		Date startDate = new Date();
 		Date endDate = new Date();
 		endDate.setTime(endDate.getTime() + 3600000);
-		List<Klant> klanten = new ArrayList<>();
+		List<List<Klant>> roomse = new ArrayList<List<Klant>>();
 
 		for (String r : rooms) {
 			try {
 				logIn(r, service);
-				klanten = findAppointments2(r, service, startDate, endDate);
+				roomse.add(findAppointments2(r, service, startDate, endDate));
 			} catch (Exception e) {
 
 			}
 		}
-		return klanten;
+		return roomse;
 	}
 
 	public void printAppointmentsToday() {

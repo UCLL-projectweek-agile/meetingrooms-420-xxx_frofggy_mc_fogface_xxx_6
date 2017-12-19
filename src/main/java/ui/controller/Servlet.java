@@ -117,9 +117,9 @@ public class Servlet extends HttpServlet {
     private String overview(HttpServletRequest request, HttpServletResponse response) {
     	
     	Service service = new Service();
-    	List<Klant> klanten = service.printAppointmentsvoorWeb();
+    	List<List<Klant>> rooms = service.printAppointmentsvoorWeb();
     	service.printAppointmentsvoorWeb();
-    	request.setAttribute("klanten", klanten);
+    	request.setAttribute("klanten", rooms);
     	return "LokaaloverviewOud.jsp";
     }
 		
