@@ -17,6 +17,7 @@ public class Application {
          service.printAppointmentsNow();
          //Arnolds work to get txt file for whole day
          service.printAppointmentsToday();
+         
     }
     
 }
