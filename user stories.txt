@@ -1,0 +1,37 @@
+
+--------------------------------------------------------------------------------
+USER STORY 1		   						       
+--------------------------------------------------------------------------------
+Als gebruiker kan ik alle lokalen en uren/dag uitprinten.		       
+
+ACCEPTANCE CRITERIA
+- Data uit databank wordt via sysout/txt-bestand uitgeprint.
+--------------------------------------------------------------------------------
+
+
+
+
+--------------------------------------------------------------------------------
+USER STORY 2
+--------------------------------------------------------------------------------
+Als gebruiker kan ik alle lokalen in het huidige moment kunnen zien.
+
+ACCEPTANCE CRITERIA
+- Data uit databank omzetten naar overzicht.
+- Student kan overzicht opvragen.
+- Overzicht bestaat uit alle lokalen met daarbij de uren van de dag.
+--------------------------------------------------------------------------------
+
+
+
+
+--------------------------------------------------------------------------------
+USER STORY 3
+--------------------------------------------------------------------------------
+Als gebruiker kan ik het overzicht van lokalen downloaden naar mijn computer/gsm.
+
+ACCEPTANCE CRITERIA
+- (Downloadbaar) Overzicht overzetten naar een pdf/doc/txt bestand.
+--------------------------------------------------------------------------------
+
+
