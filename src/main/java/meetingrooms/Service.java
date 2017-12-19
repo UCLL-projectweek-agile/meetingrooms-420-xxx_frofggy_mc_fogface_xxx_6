@@ -89,6 +89,7 @@ public class Service {
             appointment += "SUBJECT: " + appt.getSubject() + "\n";
             appointment += "FROM: " + appt.getStart() + "\n";
             appointment += "TILL: " + appt.getEnd() + "\n";
+            
         }
         appointment += "---------------------------------";
         return appointment;

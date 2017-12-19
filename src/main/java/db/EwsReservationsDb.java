@@ -63,7 +63,7 @@ public class EwsReservationsDb {
         List<domain.Appointment> list = new ArrayList<>();
         for(String r : roomUrls){
             List<Appointment> apps = findAppointments(r, startDate, endDate);
-            Lokaal lokaal = new Lokaal(r,r,0,0,true);
+            Lokaal lokaal = new Lokaal(r,r,0,0);
             for(Appointment a : apps){
                 list.add(new domain.Appointment(lokaal, a));
             }
