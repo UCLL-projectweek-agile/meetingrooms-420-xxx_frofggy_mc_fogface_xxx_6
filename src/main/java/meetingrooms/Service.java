@@ -167,6 +167,10 @@ public class Service {
         }
         p.close();
     }
+    
+    public List<String> appointmentStartAndEnd(String room, ExchangeService service, Date startDate, Date endDate){
+    	return null;
+    }
 
     public List<domain.Appointment> getCurrentAppointments() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
