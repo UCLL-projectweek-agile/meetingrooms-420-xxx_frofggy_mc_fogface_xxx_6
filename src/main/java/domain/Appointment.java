@@ -6,6 +6,7 @@
 package domain;
 
 import java.util.Date;
+import microsoft.exchange.webservices.data.core.PropertySet;
 
 /**
  *
@@ -14,6 +15,14 @@ import java.util.Date;
 public class Appointment {
     
     private Lokaal lokaal;
+
+    public Appointment(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
+       setLokaal(lokaal);
+       
+        appt.load(PropertySet.FirstClassProperties);
+        this.setStartDate(appt.getStart());
+        this.setEndDate(appt.getEnd());
+    }
 
     public Lokaal getLokaal() {
         return lokaal;
@@ -51,4 +60,8 @@ public class Appointment {
         
     }
     
+    @Override
+    public String toString(){
+        return lokaal.toString() + " Start: " + startDate + " End: " + endDate;
+    }
 }

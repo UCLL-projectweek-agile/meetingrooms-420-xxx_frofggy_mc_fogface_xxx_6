@@ -15,7 +15,7 @@
     <body>
         <h1>Hello World!</h1>
         <c:forEach var="appointment" items="${appointments}">
-            <p>${appointments}</p>
+            <p>${appointment}</p>
         </c:forEach>
     </body>
 </html>

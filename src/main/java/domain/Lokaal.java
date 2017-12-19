@@ -49,5 +49,10 @@ public class Lokaal {
 	public void setStoelen(int stoelen) {
 		this.stoelen = stoelen;
 	}
+
+        @Override
+        public String toString(){
+            return naam;
+        }
 	
 }
