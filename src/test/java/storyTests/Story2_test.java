@@ -39,6 +39,4 @@ public class Story2_test {
 			e.printStackTrace();
 		}
 	}
-	
-	@
 }
