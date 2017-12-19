@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import microsoft.exchange.webservices.data.core.ExchangeService;
-import microsoft.exchange.webservices.data.core.PropertySet;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
 import microsoft.exchange.webservices.data.core.enumeration.property.WellKnownFolderName;
 import microsoft.exchange.webservices.data.core.service.folder.CalendarFolder;
@@ -64,7 +63,7 @@ public class EwsReservationsDb {
         List<domain.Appointment> list = new ArrayList<>();
         for(String r : roomUrls){
             List<Appointment> apps = findAppointments(r, startDate, endDate);
-            Lokaal lokaal = new Lokaal(r,r,0,0,true);
+            Lokaal lokaal = new Lokaal(r,r,0,0);
             for(Appointment a : apps){
                 list.add(new domain.Appointment(lokaal, a));
             }
