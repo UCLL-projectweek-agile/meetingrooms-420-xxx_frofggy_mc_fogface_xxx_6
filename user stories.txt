@@ -5,7 +5,7 @@ USER STORY 1
 Als gebruiker kan ik alle lokalen en uren/dag uitprinten.		       
 
 ACCEPTANCE CRITERIA
-- Data uit databank wordt via sysout/txt-bestand uitgeprint.
+- Data uit databank wordt via sysout/txt-bestand uitgeprint voor 1 dag.
 --------------------------------------------------------------------------------
 
 
@@ -24,14 +24,24 @@ ACCEPTANCE CRITERIA
 
 
 
-
 --------------------------------------------------------------------------------
 USER STORY 3
 --------------------------------------------------------------------------------
 Als gebruiker kan ik het overzicht van lokalen downloaden naar mijn computer/gsm.
 
 ACCEPTANCE CRITERIA
-- (Downloadbaar) Overzicht overzetten naar een pdf/doc/txt bestand.
+- (Downloadbaar) Overzicht overzetten naar een pdf/doc/txt bestand voor 1 dag.
 --------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------
+USER STORY 4
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+
+
 
 
