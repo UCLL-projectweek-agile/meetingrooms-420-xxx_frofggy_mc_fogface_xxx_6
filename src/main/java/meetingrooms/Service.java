@@ -98,5 +98,41 @@ public class Service {
             }
         }
     }
+    public void printAppointmentsToday(){
+        rooms.add("HSR-Yangtze@ucll.be");
+        rooms.add("HSR-Schelde@ucll.be");
+        rooms.add("HSR-Sarine@ucll.be");
+        rooms.add("HSR-Rhone@ucll.be");
+        rooms.add("HSR-Po@ucll.be");
+        rooms.add("HSR-Ebro@ucll.be");
+        rooms.add("HSR-Maas@ucll.be");
+        rooms.add("HSR-Douro@ucll.be");
+        rooms.add("HSR-Donau@ucll.be");
+        rooms.add("HSR-Chao-Praya@ucll.be");
+        rooms.add("HSR-Arno@ucll.be");
+        
+        
+        ExchangeService service = new ExchangeService();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date startDate = new Date();
+        Date endDate = new Date();
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+        
+        endDate.setHours(23);
+        endDate.setMinutes(59);
+        endDate.setSeconds(59);
+        
+        for(String r : rooms){
+            try{
+                logIn(r, service);
+                findAppointments(r, service, startDate, endDate);
+            }catch (Exception e){
+                
+            }
+        }
+    }
+    
     
 }
