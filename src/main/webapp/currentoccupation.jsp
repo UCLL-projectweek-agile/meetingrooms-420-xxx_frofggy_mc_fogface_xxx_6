@@ -20,8 +20,8 @@
       <a class="navbar-brand" href="#">Reservatie lokalen</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="Servlet?action=current">Overzicht</a></li>
+      <li><a href="#">Home</a></li>
+      <li class = "active"><a href="Servlet?action=current">Overzicht</a></li>
       <li><a href="#">Reserveer</a></li>
       <li><a href="#">Registreer</a></li>
     </ul>
