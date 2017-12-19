@@ -103,7 +103,7 @@ public class Servlet extends HttpServlet {
 	
 	public String check(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		return "Lokaaloverview.jsp";
+		return "LokaaloverviewOud.jsp";
 	}
 
     private String current(HttpServletRequest request, HttpServletResponse response) {
@@ -125,10 +125,10 @@ public class Servlet extends HttpServlet {
     private String overview(HttpServletRequest request, HttpServletResponse response) {
     	
     	Service service = new Service();
-    	List<Klant> klanten = service.printAppointmentsvoorWeb();
+    	List<List<Klant>> rooms = service.printAppointmentsvoorWeb();
     	service.printAppointmentsvoorWeb();
-    	request.setAttribute("klanten", klanten);
-    	return "Lokaaloverview.jsp";
+    	request.setAttribute("klanten", rooms);
+    	return "LokaaloverviewOud.jsp";
     }
 		
 }

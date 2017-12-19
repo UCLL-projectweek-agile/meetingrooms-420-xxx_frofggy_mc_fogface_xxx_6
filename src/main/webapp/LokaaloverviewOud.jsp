@@ -37,14 +37,15 @@
 				<th>23</th>
 			</tr>
 
-			<c:forEach var="klant" items="${klanten}">
+			<c:forEach var="klanten2" items="${klanten}">
+				<c:forEach var="klant" items="${klanten2 }">
 
 				<tr>
 					<td>${klant.naam}</td>
 
 					<td></td>
 				</tr>
-
+			</c:forEach>
 			</c:forEach>
 		</table>
 		</main>
