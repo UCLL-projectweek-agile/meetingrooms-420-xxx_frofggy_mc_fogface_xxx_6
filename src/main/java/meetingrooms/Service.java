@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import domain.Klant;
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.PropertySet;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
@@ -68,8 +70,34 @@ public class Service {
             System.out.println("SUBJECT: " + appt.getSubject());
             System.out.println("FROM: " + appt.getStart());
             System.out.println("TILL: " + appt.getEnd());
+            Klant klant = new Klant(appt.getSubject(), appt.getStart(), appt.getEnd());
         }
         System.out.println("---------------------------------");
+    }
+    
+ public List<Klant> findAppointments2(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
+        
+        //binds to the calendar folder of the room
+        Mailbox mailbox = new Mailbox(room);
+        FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
+        CalendarFolder calendarFolder = CalendarFolder.bind(service, folderId);
+        //read calendar of room
+        CalendarView calendarView = new CalendarView(startDate, endDate);
+        FindItemsResults<Appointment> findResults
+                = calendarFolder.findAppointments(calendarView);
+        System.out.println("---------------------------------");
+        System.out.println("Room: "+room);
+        List<Klant>klanten = new ArrayList<>();
+        for (Appointment appt : findResults.getItems()) {
+            appt.load(PropertySet.FirstClassProperties);
+            System.out.println("SUBJECT: " + appt.getSubject());
+            System.out.println("FROM: " + appt.getStart());
+            System.out.println("TILL: " + appt.getEnd());
+            Klant klant = new Klant(appt.getSubject(), appt.getStart(), appt.getEnd());
+            klanten.add(klant);
+        }
+        System.out.println("---------------------------------");
+        return klanten;
     }
     
     public String stringFindAppointments(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
