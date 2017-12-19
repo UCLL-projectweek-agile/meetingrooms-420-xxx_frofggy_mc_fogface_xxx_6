@@ -13,7 +13,9 @@ public class Application {
 
      public static void main(String[] args) throws Exception {
          Service service = new Service();
-        //service.printAppointmentsNow();
+         //Daans work to get appointments for now
+         service.printAppointmentsNow();
+         //Arnolds work to get txt file for whole day
          service.printAppointmentsToday();
     }
     
