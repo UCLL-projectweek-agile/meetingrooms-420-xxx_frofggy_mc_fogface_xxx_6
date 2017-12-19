@@ -40,7 +40,7 @@
 			<c:forEach var="lokaal" items="${lokaal}">
 
 				<tr>
-					<td>${lokaal.naam}</td>
+					<td>${klant.naam}</td>
 					<td></td>
 				</tr>
 
