@@ -47,8 +47,8 @@ public class LokaalSQLDb {
 		String naam = result.getString("naam");
 		int stopcontact = result.getInt("stopcontact");
 		int stoelen = result.getInt("stoelen");
-		boolean status = result.getBoolean("status");
-		Lokaal lokaal = new Lokaal(lokaalid, naam, stopcontact, stoelen, status);
+		
+		Lokaal lokaal = new Lokaal(lokaalid, naam, stopcontact, stoelen);
 		return lokaal;
 		}
 		}
@@ -79,8 +79,7 @@ public class LokaalSQLDb {
 				String naam = result.getString("naam");
 				int stopcontact = result.getInt("stopcontact");
 				int stoelen = result.getInt("stoelen");
-				boolean status = result.getBoolean("status");
-				Lokaal lokaal = new Lokaal(lokaalid, naam, stopcontact, stoelen, status);
+				Lokaal lokaal = new Lokaal(lokaalid, naam, stopcontact, stoelen);
 				lokalen.add(lokaal);
 			
 			}
@@ -101,7 +100,7 @@ public class LokaalSQLDb {
 	}
 
 	public void add(Lokaal lokaal) {
-		String sql = "INSERT INTO groep6.lokaal (lokaalid, naam, stopcontact, stoelen, status)" + " VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO groep6.lokaal (lokaalid, naam, stopcontact, stoelen)" + " VALUES(?,?,?,?)";
 		try{
 			connection = DriverManager.getConnection(url, properties);
 			statement1 = connection.prepareStatement(sql);
@@ -110,7 +109,6 @@ public class LokaalSQLDb {
 			statement1.setString(2, lokaal.getNaam());
 			statement1.setInt(3, lokaal.getStopcontact());
 			statement1.setInt(4, lokaal.getStoelen());
-			statement1.setBoolean(5, lokaal.isStatus());
 				
 			statement1.execute();
 		} catch (SQLException exc){
