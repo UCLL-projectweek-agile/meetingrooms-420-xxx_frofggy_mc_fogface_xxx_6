@@ -61,11 +61,6 @@ public class Story3_Test {
 	}
 
 	@Test
-	public void fileNotEmpty() throws FileNotFoundException {
-		assertFalse(bestandInhoud.isEmpty());
-	}
-
-	@Test
 	public void fileStructureCorrect() {
 		
 	}
