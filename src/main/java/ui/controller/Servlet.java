@@ -54,7 +54,7 @@ public class Servlet extends HttpServlet {
         rooms.add("HSR-Arno@ucll.be");
         ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
         db = new EwsReservationsDb(rooms, credentials);
-        service = new Service();
+        service = new Service(rooms);
         requestHandlerFactory = new RequestHandlerFactory(service);
     }
 

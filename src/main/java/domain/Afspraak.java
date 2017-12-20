@@ -5,64 +5,55 @@
  */
 package domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import microsoft.exchange.webservices.data.core.PropertySet;
-import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
 
 /**
  *
  * @author Daan
  */
 public class Afspraak {
-    
+
     private Lokaal lokaal;
-    private double start;
-    private double end;
-    private double duration;
-    private Date startDate;
-    private Date endDate;
+    
+    private Calendar startDate;
+    private Calendar endDate;
+    
+    private int startMinute;
+    private int startHour;
+    private int endMinute;
+    private int endHour;
 
     public Afspraak(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
-       
-    	this.setLokaal(lokaal);
+        this.setLokaal(lokaal);
         appt.load(PropertySet.FirstClassProperties);
-        this.setStartDate(appt.getStart());
-        this.setEndDate(appt.getEnd());
+        this.setStartDate(toCalendar(appt.getStart()));
+        this.setEndDate(toCalendar(appt.getEnd()));
+        this.setStartHour();
+        this.setStartMinute();
+        this.setEndHour();
+        this.setEndMinute();
+    }
+    
+
+    public Afspraak(Lokaal lokaal, Calendar startDate, Calendar endDate) {
+        this.lokaal = lokaal;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    
-    
-    public double getStart() {
-		return start;
-	}
-    
-	public void setStart(){
-		start = startDate.getHours() + (startDate.getMinutes() / 60) + (startDate.getSeconds() / 3600); 
-		this.start = start;
-	}
-	
-	public double getEnd() {
-		return end;
-	}
-	
-	public void setEnd(microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws ServiceLocalException {
-		 end = appt.getEnd().getHours() + (appt.getEnd().getMinutes() / 60) + (appt.getEnd().getSeconds() / 3600);
-		 
-		 this.end = end;
-		
-	}
-	public double getDuration() {
-		return duration;
-	}
-	
-	public void setDuration(microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws ServiceLocalException {
-		
-		duration = appt.getDuration().getHours() + (appt.getDuration().getMinutes() / 60) + (appt.getDuration().getSeconds() / 3600);
-		
-		this.duration = duration;
-	}
-	
-	public Lokaal getLokaal() {
+    public Afspraak() {
+
+    }
+
+    public Calendar toCalendar(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
+    }
+
+    public Lokaal getLokaal() {
         return lokaal;
     }
 
@@ -70,39 +61,61 @@ public class Afspraak {
         this.lokaal = lokaal;
     }
 
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
     }
-    
-    public Afspraak(Lokaal lokaal, Date startDate, Date endDate){
-        this.lokaal = lokaal;
-        this.startDate = startDate;
-        this.endDate = endDate;
+
+    public boolean berekenBeschikbaarheid() {
+        //lokaal
+        return true;
     }
-    
-    public Afspraak(){
-        
-    }
-    
-    public boolean berekenBeschikbaarheid(){
-    	//lokaal
-    	return true;
-    }
-    
+
     @Override
-    public String toString(){
-        return lokaal.toString() + " Start: " + startDate + " End: " + endDate;
+    public String toString() {
+        return lokaal.toString() + " Start: " + startHour+":"+ startMinute + " End: " + endHour+":"+ endMinute;
+    }
+    
+    public void setStartHour(){
+        startHour = startDate.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public int getStartHour() {
+        return startHour;
+    }
+    
+    public void setStartMinute(){
+        startMinute = startDate.get(Calendar.MINUTE);
+    }
+    
+    public int getStartMinute() {
+        return startMinute;
+    }
+
+    public int getEndMinute() {
+        return endMinute;
+    }
+
+    public void setEndMinute() {
+        this.endMinute = endDate.get(Calendar.MINUTE);
+    }
+
+    public int getEndHour() {
+        return endHour;
+    }
+
+    public void setEndHour() {
+        this.endHour = endDate.get(Calendar.HOUR_OF_DAY);
     }
 }
