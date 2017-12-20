@@ -1,4 +1,4 @@
-package ui.RequestHandlers;
+package ui.handlers;
 
 import static java.lang.annotation.ElementType.TYPE;
 

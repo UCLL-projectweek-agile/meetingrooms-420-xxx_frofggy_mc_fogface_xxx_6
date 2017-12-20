@@ -18,7 +18,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="Servlet?action=current">Overzicht</a></li>
-      <li><a href="Servlet?action=overview">lokaalOvervieuw</a></li>
+      <li><a href="Servlet?action=overview">lokaalOverview</a></li>
       <li><a href="#">Registreer</a></li>
     </ul>
   </div>

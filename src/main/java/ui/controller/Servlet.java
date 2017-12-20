@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import microsoft.exchange.webservices.data.core.service.item.Appointment;
 import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
 import microsoft.exchange.webservices.data.credential.WebCredentials;
+import ui.handlers.RequestHandler;
+import ui.handlers.RequestHandlerFactory;
 
 /**
  * Servlet implementation class Servlet
@@ -27,12 +29,14 @@ import microsoft.exchange.webservices.data.credential.WebCredentials;
 @WebServlet("/Servlet")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-        private static EwsReservationsDb db;
+        private final EwsReservationsDb db;
+        private RequestHandlerFactory requestHandlerFactory;
+        private final Service service;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Servlet() {
+    public Servlet() throws Exception{
         super();
         
         List<String> rooms = new ArrayList<>();
@@ -49,6 +53,8 @@ public class Servlet extends HttpServlet {
         rooms.add("HSR-Arno@ucll.be");
         ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
         db = new EwsReservationsDb(rooms, credentials);
+        service = new Service();
+        requestHandlerFactory = new RequestHandlerFactory(service);
     }
 
 	/**
@@ -89,6 +95,7 @@ public class Servlet extends HttpServlet {
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(doel);
 		rd.forward(request, response);
+                
                 /*
                 String req = request.getParameter("action");
 		try{
@@ -97,8 +104,7 @@ public class Servlet extends HttpServlet {
 		}catch(Exception e) {
                     e.printStackTrace();
 		}
-                */
-		
+		*/
 	}
 	
 	public String check(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
