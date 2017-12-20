@@ -50,6 +50,11 @@ public class Story3_Test {
 		}
 
 	}
+	
+	@Test
+	public void fileStructureCorrect() {
+		
+	}
 
 	@Test
 	public void fileExists() throws FileNotFoundException {
@@ -64,10 +69,7 @@ public class Story3_Test {
 		assertTrue(!bestandInhoud.isEmpty());
 	}
 
-	@Test
-	public void fileStructureCorrect() {
-		
-	}
+	
 	
 
 
