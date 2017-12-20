@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import domain.Afspraak;
 import domain.Klant;
 import domain.Lokaal;
 
@@ -97,7 +98,7 @@ public class Service {
         System.out.println("---------------------------------");
     }
     
- public List<Klant> findAppointments2(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
+ public List<Afspraak> findAppointments2(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
         
         //binds to the calendar folder of the room
         Mailbox mailbox = new Mailbox(room);
@@ -109,16 +110,16 @@ public class Service {
                 = calendarFolder.findAppointments(calendarView);
         
        
-        List<Klant>klanten = new ArrayList<>();
+        List<Afspraak>afspraken = new ArrayList<>();
         for (Appointment appt : findResults.getItems()) {
             appt.load(PropertySet.FirstClassProperties);
 //            int start = appt.getStart().getHours() + (appt.getStart().getMinutes() / 60) + (appt.getStart().getSeconds() / 3600); 
 //            int end = appt.getEnd().getHours() + (appt.getEnd().getMinutes() / 60) + (appt.getEnd().getSeconds() / 3600); 
             Lokaal lokaal = new Lokaal(room);
-   
+            Afspraak afspraak = new Afspraak(lokaal, appt);
+            afspraken.add(afspraak);
         }
-       
-        return klanten;
+        return afspraken;
     }
     
     public String stringFindAppointments(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
@@ -174,7 +175,7 @@ public class Service {
         }
     }
     
-    public List<List<Klant>> printAppointmentsvoorWeb() {
+    public List<List<Afspraak>> printAppointmentsvoorWeb() {
 		rooms.add("HSR-Yangtze@ucll.be");
 		rooms.add("HSR-Schelde@ucll.be");
 		rooms.add("HSR-Sarine@ucll.be");
@@ -192,14 +193,14 @@ public class Service {
 		Date startDate = new Date();
 		Date endDate = new Date();
 		endDate.setTime(endDate.getTime() + 3600000);
-		List<List<Klant>> roomse = new ArrayList<List<Klant>>();
+		List<List<Afspraak>> roomse = new ArrayList<List<Afspraak>>();
 
 		for (String r : rooms) {
 			try {
 				logIn(r, service);
 				roomse.add(findAppointments2(r, service, startDate, endDate));
 			} catch (Exception e) {
-
+				System.out.println(e.getMessage());
 			}
 		}
 		return roomse;
