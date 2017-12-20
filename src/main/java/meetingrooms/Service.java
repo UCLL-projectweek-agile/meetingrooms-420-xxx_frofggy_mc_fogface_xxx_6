@@ -13,9 +13,6 @@ import domain.Afspraak;
 import domain.Klant;
 import domain.Lokaal;
 
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.PropertySet;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
@@ -35,35 +32,25 @@ import microsoft.exchange.webservices.data.search.FindItemsResults;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Daan
  */
 public class Service {
-    
-    
+
     private ExchangeService service = new ExchangeService();
 
     private List<String> rooms = new ArrayList<>();
+    private List<Afspraak> afspraken;
+    private double lastChecked;
     private final EwsReservationsDb db;
-    
-    public Service(){
-        rooms.add("HSR-Yangtze@ucll.be");
-        rooms.add("HSR-Schelde@ucll.be");
-        rooms.add("HSR-Sarine@ucll.be");
-        rooms.add("HSR-Rhone@ucll.be");
-        rooms.add("HSR-Po@ucll.be");
-        rooms.add("HSR-Ebro@ucll.be");
-        rooms.add("HSR-Maas@ucll.be");
-        rooms.add("HSR-Douro@ucll.be");
-        rooms.add("HSR-Donau@ucll.be");
-        rooms.add("HSR-Chao-Praya@ucll.be");
-        rooms.add("HSR-Arno@ucll.be");
+
+    public Service(List<String> rooms) {
+        this.rooms = rooms;
         ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
         db = new EwsReservationsDb(rooms, credentials);
     }
-    
+
     public void logIn(String room, ExchangeService service) throws Exception {
         // user with read access for room information
         ExchangeCredentials credentials
@@ -77,7 +64,7 @@ public class Service {
     }
 
     public void findAppointments(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
-        
+
         //binds to the calendar folder of the room
         Mailbox mailbox = new Mailbox(room);
         FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
@@ -87,7 +74,7 @@ public class Service {
         FindItemsResults<Appointment> findResults
                 = calendarFolder.findAppointments(calendarView);
         System.out.println("---------------------------------");
-        System.out.println("Room: "+room);
+        System.out.println("Room: " + room);
         for (Appointment appt : findResults.getItems()) {
             appt.load(PropertySet.FirstClassProperties);
             System.out.println("SUBJECT: " + appt.getSubject());
@@ -97,9 +84,9 @@ public class Service {
         }
         System.out.println("---------------------------------");
     }
-    
- public List<Afspraak> findAppointments2(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
-        
+
+    public List<Afspraak> findAppointments2(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
+
         //binds to the calendar folder of the room
         Mailbox mailbox = new Mailbox(room);
         FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
@@ -108,9 +95,8 @@ public class Service {
         CalendarView calendarView = new CalendarView(startDate, endDate);
         FindItemsResults<Appointment> findResults
                 = calendarFolder.findAppointments(calendarView);
-        
-       
-        List<Afspraak>afspraken = new ArrayList<>();
+
+        List<Afspraak> afspraken = new ArrayList<>();
         for (Appointment appt : findResults.getItems()) {
             appt.load(PropertySet.FirstClassProperties);
 //            int start = appt.getStart().getHours() + (appt.getStart().getMinutes() / 60) + (appt.getStart().getSeconds() / 3600); 
@@ -121,9 +107,9 @@ public class Service {
         }
         return afspraken;
     }
-    
+
     public String stringFindAppointments(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
-        
+
         String appointment = "";
         Mailbox mailbox = new Mailbox(room);
         FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
@@ -133,99 +119,70 @@ public class Service {
         FindItemsResults<Appointment> findResults
                 = calendarFolder.findAppointments(calendarView);
         appointment += "---------------------------------\n";
-        appointment += "Room: "+room + "\n";
+        appointment += "Room: " + room + "\n";
         for (Appointment appt : findResults.getItems()) {
             appt.load(PropertySet.FirstClassProperties);
             appointment += "SUBJECT: " + appt.getSubject() + "\n";
             appointment += "FROM: " + appt.getStart() + "\n";
             appointment += "TILL: " + appt.getEnd() + "\n";
-            
+
         }
         appointment += "---------------------------------";
         return appointment;
     }
-    
-    public void printAppointmentsNow(){
-        rooms.add("HSR-Yangtze@ucll.be");
-        rooms.add("HSR-Schelde@ucll.be");
-        rooms.add("HSR-Sarine@ucll.be");
-        rooms.add("HSR-Rhone@ucll.be");
-        rooms.add("HSR-Po@ucll.be");
-        rooms.add("HSR-Ebro@ucll.be");
-        rooms.add("HSR-Maas@ucll.be");
-        rooms.add("HSR-Douro@ucll.be");
-        rooms.add("HSR-Donau@ucll.be");
-        rooms.add("HSR-Chao-Praya@ucll.be");
-        rooms.add("HSR-Arno@ucll.be");
-        
-        
+
+    public void printAppointmentsNow() {
+
         ExchangeService service = new ExchangeService();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = new Date();
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
-        
-        for(String r : rooms){
-            try{
+
+        for (String r : rooms) {
+            try {
                 logIn(r, service);
                 findAppointments(r, service, startDate, endDate);
-            }catch (Exception e){
-                
+            } catch (Exception e) {
+
             }
         }
     }
-    
-    public List<List<Afspraak>> printAppointmentsvoorWeb() {
-		rooms.add("HSR-Yangtze@ucll.be");
-		rooms.add("HSR-Schelde@ucll.be");
-		rooms.add("HSR-Sarine@ucll.be");
-		rooms.add("HSR-Rhone@ucll.be");
-		rooms.add("HSR-Po@ucll.be");
-		rooms.add("HSR-Ebro@ucll.be");
-		rooms.add("HSR-Maas@ucll.be");
-		rooms.add("HSR-Douro@ucll.be");
-		rooms.add("HSR-Donau@ucll.be");
-		rooms.add("HSR-Chao-Praya@ucll.be");
-		rooms.add("HSR-Arno@ucll.be");
 
-		ExchangeService service = new ExchangeService();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date startDate = new Date();
-		Date endDate = new Date();
-		endDate.setTime(endDate.getTime() + 3600000);
-		List<List<Afspraak>> roomse = new ArrayList<List<Afspraak>>();
+    public List<Afspraak> printAppointmentsvoorWeb() {
+        double now = new Date().getTime();
+        if (afspraken != null && (now - lastChecked) < 60000) {
+            return afspraken;
+        } else {
+            lastChecked = now;
 
-		for (String r : rooms) {
-			try {
-				logIn(r, service);
-				roomse.add(findAppointments2(r, service, startDate, endDate));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return roomse;
-	}
-	public void printAppointmentsToday() {
-		PrintWriter p = null;
-		try {
-			p = new PrintWriter("DagSchema.txt", "UTF-8");
-		} catch (FileNotFoundException | UnsupportedEncodingException e1) {
-			System.out.println(e1.getMessage());
-		}
-		
-        rooms.add("HSR-Yangtze@ucll.be");
-        rooms.add("HSR-Schelde@ucll.be");
-        rooms.add("HSR-Sarine@ucll.be");
-        rooms.add("HSR-Rhone@ucll.be");
-        rooms.add("HSR-Po@ucll.be");
-        rooms.add("HSR-Ebro@ucll.be");
-        rooms.add("HSR-Maas@ucll.be");
-        rooms.add("HSR-Douro@ucll.be");
-        rooms.add("HSR-Donau@ucll.be");
-        rooms.add("HSR-Chao-Praya@ucll.be");
-        rooms.add("HSR-Arno@ucll.be");
-        
-        
+            ExchangeService service = new ExchangeService();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date startDate = new Date();
+            Date endDate = new Date();
+            endDate.setTime(endDate.getTime() + 3600000);
+            List<Afspraak> roomse = new ArrayList<>();
+
+            for (String r : rooms) {
+                try {
+                    logIn(r, service);
+                    roomse.addAll(findAppointments2(r, service, startDate, endDate));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            afspraken = roomse;
+            return roomse;
+        }
+    }
+
+    public void printAppointmentsToday() {
+        PrintWriter p = null;
+        try {
+            p = new PrintWriter("DagSchema.txt", "UTF-8");
+        } catch (FileNotFoundException | UnsupportedEncodingException e1) {
+            System.out.println(e1.getMessage());
+        }
         ExchangeService service = new ExchangeService();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = new Date();
@@ -233,41 +190,39 @@ public class Service {
         startDate.setHours(0);
         startDate.setMinutes(0);
         startDate.setSeconds(0);
-        
+
         endDate.setHours(23);
         endDate.setMinutes(59);
         endDate.setSeconds(59);
-        
-        for(String r : rooms){
-            try{
+
+        for (String r : rooms) {
+            try {
                 logIn(r, service);
-                p.write(stringFindAppointments(r, service, startDate, endDate));          
-            }catch (Exception e){
-                
+                p.write(stringFindAppointments(r, service, startDate, endDate));
+            } catch (Exception e) {
+
             }
         }
         p.close();
     }
-    
 
     public List<domain.Afspraak> getCurrentAppointments() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public void printLokaal(String r) {
-        
-        
+
         ExchangeService service = new ExchangeService();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = new Date();
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
-        
-        try{
+
+        try {
             logIn(r, service);
             findAppointments(r, service, startDate, endDate);
-        }catch (Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
 

@@ -29,16 +29,17 @@
 				<th>23</th>
 			</tr>
 
-			<c:forEach var="afspraken2" items="${afspraken}">
-				<c:forEach var="afspraak" items="${afspraken2 }">
+			<c:forEach var="afspraak" items="${afspraken}">
 
 				<tr>
 					<td>${afspraak.lokaal.lokaalID}</td>
-					<td>${afspraak.start}</td>
+					<td>${afspraak.startHour}</td>
+					<td>${afspraak.startMinute}</td>
+					<td>${afspraak.endHour}</td>
+					<td>${afspraak.endMinute}</td>
 
 					<td></td>
 				</tr>
-			</c:forEach>
 			</c:forEach>
 		</table>
 		</main>
