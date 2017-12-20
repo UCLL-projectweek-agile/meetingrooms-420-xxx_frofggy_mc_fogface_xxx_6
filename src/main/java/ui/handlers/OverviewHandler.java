@@ -21,18 +21,19 @@ import meetingrooms.Service;
 @Mapping("overview")
 public class OverviewHandler implements RequestHandler{
 
-    @Override
+    private Service service;
+
+	@Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	Service service = new Service();
-    	List<List<Afspraak>> klanten = service.printAppointmentsvoorWeb();
-    	service.printAppointmentsvoorWeb();
-    	request.setAttribute("klanten", klanten);
-    	request.getRequestDispatcher("Lokaaloverview.jsp").forward(request, response);
+    	
+    	List<List<Afspraak>> rooms = service.printAppointmentsvoorWeb();
+    	request.setAttribute("afspraken", rooms);
+    	request.getRequestDispatcher("LokaaloverviewOud.jsp").forward(request, response);
     }
 
     @Override
     public void setModel(Service model) {
-        
+        this.service = model;
     }
     
 }

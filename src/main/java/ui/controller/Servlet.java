@@ -81,18 +81,5 @@ public class Servlet extends HttpServlet {
                     e.printStackTrace();
 		}
         }
-<<<<<<< HEAD
-        return "currentoccupation.jsp";
-    }
-    
-    private String overview(HttpServletRequest request, HttpServletResponse response) {
-    	
-    	Service service = new Service();
-    	List<List<Afspraak>> rooms = service.printAppointmentsvoorWeb();
-    	request.setAttribute("afspraken", rooms);
-    	return "LokaaloverviewOud.jsp";
-    }
-		
-=======
->>>>>>> f3ccc069389e6d7b85e194d8a6b2f74fd546910b
+ 
 }
