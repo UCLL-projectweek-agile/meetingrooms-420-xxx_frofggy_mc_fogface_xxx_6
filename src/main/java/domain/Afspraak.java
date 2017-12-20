@@ -97,7 +97,7 @@ public class Afspraak {
 
     @Override
     public String toString() {
-        return lokaal.toString() + " Start: " + startDate + " End: " + endDate;
+        return lokaal.toString() + " Start: " + startHour+":"+ startMinute + " End: " + endHour+":"+ endMinute;
     }
     
     public void setStartHour(){
