@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,14 +59,32 @@ public class Story3_Test {
 		assertTrue(text.exists());
 	}
 
-	@Test
-	public void fileNotEmpty() throws FileNotFoundException {
-		assertFalse(bestandInhoud.isEmpty());
-	}
+	//@Test
+	//public void fileNotEmpty() throws FileNotFoundException {
+	//	assertTrue(!bestandInhoud.isEmpty());
+	//}
 
 	@Test
 	public void fileStructureCorrect() {
 		
 	}
+	
+	//@Test
+	//	public void NoDuplicates() throws FileNotFoundException {
+	//java.util.Map<String, Long> map = new HashMap<>();
+	//  Scanner read = new Scanner(text);
+	//  while (read.hasNext()) {
+	//      String line = read.nextLine();
+	//      if(map.containsKey(line)) {
+	//          fail();
+	//      } else {
+	//          map.put(line, 1L);
+	//      }
+	//   }
+
+	    
+	    
+	    
+	//}
 
 }
