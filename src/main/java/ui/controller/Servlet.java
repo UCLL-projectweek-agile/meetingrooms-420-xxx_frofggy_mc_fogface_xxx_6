@@ -1,6 +1,9 @@
 package ui.controller;
 
 import db.EwsReservationsDb;
+import domain.Klant;
+import meetingrooms.Service;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,19 +80,30 @@ public class Servlet extends HttpServlet {
                     case "current":
                             doel = current(request, response);
                             break;
+                    case "overview":
+                    	doel = overview(request, response);
+                    	break;
                     default:
-                        doel = "index.html";
+                        doel = "index.jsp";
                     }
 		}
-		request.setAttribute("paginawaarden", doel);
 		RequestDispatcher rd = request.getRequestDispatcher(doel);
 		rd.forward(request, response);
+                /*
+                String req = request.getParameter("action");
+		try{
+			RequestHandler rq = this.requestHandlerFactory.create(req);
+			rq.handle(request, response);
+		}catch(Exception e) {
+                    e.printStackTrace();
+		}
+                */
 		
 	}
 	
 	public String check(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		return "Lokaaloverview.jsp";
+		return "LokaaloverviewOud.jsp";
 	}
 
     private String current(HttpServletRequest request, HttpServletResponse response) {
@@ -106,6 +120,15 @@ public class Servlet extends HttpServlet {
             Logger.getLogger(Servlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "currentoccupation.jsp";
+    }
+    
+    private String overview(HttpServletRequest request, HttpServletResponse response) {
+    	
+    	Service service = new Service();
+    	List<List<Klant>> rooms = service.printAppointmentsvoorWeb();
+    	service.printAppointmentsvoorWeb();
+    	request.setAttribute("klanten", rooms);
+    	return "LokaaloverviewOud.jsp";
     }
 		
 }
