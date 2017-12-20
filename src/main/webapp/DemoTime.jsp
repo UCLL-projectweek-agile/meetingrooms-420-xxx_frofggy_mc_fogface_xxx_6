@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="styles/demo.css">
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
+
     <div class="timetable"></div>
 
     <script src="scripts/timetable.js"></script>
