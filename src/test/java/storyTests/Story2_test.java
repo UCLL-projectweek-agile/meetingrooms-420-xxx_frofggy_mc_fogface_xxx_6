@@ -1,6 +1,7 @@
 package storyTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,7 +35,8 @@ public class Story2_test {
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
 		try {
-			assertEquals(string, service.stringFindAppointments("HSR-.*@ucll.be", services, startDate, endDate));
+			assertEquals(string, service.stringFindAppointments("HSR-Schelde@ucll.be", services, startDate, endDate));
+			System.out.println("test");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
