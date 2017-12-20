@@ -1,19 +1,11 @@
-<!DOCTYPE html>
 <%@page import="domain.*"%>
 <%@page import="db.*"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta charset="UTF-8">
-<title>Overview</title>
-<link rel="stylesheet" type="text/css" href="">
-</head>
-<body>
-	<div id="container">
-		<jsp:include page="header.jsp" />
-		<h2>Lokaal Overview</h2>
 
+<jsp:include page="header.jsp" />
+
+	
+		<h2>Lokaal Overview</h2>
 		<main>
 		<table>
 			<tr>
@@ -49,7 +41,9 @@
 			</c:forEach>
 		</table>
 		</main>
-		<%@include file="footer.jsp"%>
-	</div>
+		<div class="panel-footer">
+		<p>&copy; Company | Privacy | Terms</p>
+		</div>
+	
 </body>
 </html>

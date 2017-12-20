@@ -84,7 +84,7 @@ public class Servlet extends HttpServlet {
                     	doel = overview(request, response);
                     	break;
                     default:
-                        doel = "index.html";
+                        doel = "index.jsp";
                     }
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(doel);
