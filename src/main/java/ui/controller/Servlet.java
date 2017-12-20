@@ -133,7 +133,6 @@ public class Servlet extends HttpServlet {
     	
     	Service service = new Service();
     	List<List<Afspraak>> rooms = service.printAppointmentsvoorWeb();
-    	service.printAppointmentsvoorWeb();
     	request.setAttribute("afspraken", rooms);
     	return "LokaaloverviewOud.jsp";
     }
