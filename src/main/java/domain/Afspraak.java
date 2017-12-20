@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import microsoft.exchange.webservices.data.core.PropertySet;
 import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
@@ -19,8 +20,9 @@ public class Afspraak {
     private double start;
     private double end;
     private double duration;
-    private Date startDate;
-    private Date endDate;
+    private Calendar startDate;
+    private Calendar endDate;
+    private Calendar durationCalendar;
 
     public Afspraak(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
        
@@ -37,7 +39,7 @@ public class Afspraak {
 	}
     
 	public void setStart(){
-		start = startDate.getHours() + (startDate.getMinutes() / 60) + (startDate.getSeconds() / 3600); 
+		start = startDate.getTimeInMillis(); 
 		this.start = start;
 	}
 	
@@ -45,8 +47,8 @@ public class Afspraak {
 		return end;
 	}
 	
-	public void setEnd(microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws ServiceLocalException {
-		 end = appt.getEnd().getHours() + (appt.getEnd().getMinutes() / 60) + (appt.getEnd().getSeconds() / 3600);
+	public void setEnd() {
+		 end = endDate.getTimeInMillis();
 		 
 		 this.end = end;
 		
@@ -55,9 +57,9 @@ public class Afspraak {
 		return duration;
 	}
 	
-	public void setDuration(microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws ServiceLocalException {
+	public void setDuration(){
 		
-		duration = appt.getDuration().getHours() + (appt.getDuration().getMinutes() / 60) + (appt.getDuration().getSeconds() / 3600);
+		duration = du;
 		
 		this.duration = duration;
 	}
@@ -70,23 +72,23 @@ public class Afspraak {
         this.lokaal = lokaal;
     }
 
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
     }
     
-    public Afspraak(Lokaal lokaal, Date startDate, Date endDate){
+    public Afspraak(Lokaal lokaal, Calendar startDate, Calendar endDate){
         this.lokaal = lokaal;
         this.startDate = startDate;
         this.endDate = endDate;
