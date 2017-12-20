@@ -75,7 +75,7 @@ public class Servlet extends HttpServlet {
 	}
 	
 	protected void verwerk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		/*
 		String action = request.getParameter("action");
 		String doel = "index.jsp";	
 		
@@ -96,8 +96,7 @@ public class Servlet extends HttpServlet {
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(doel);
 		rd.forward(request, response);
-                
-                /*
+                */
                 String req = request.getParameter("action");
 		try{
 			RequestHandler rq = this.requestHandlerFactory.create(req);
@@ -105,7 +104,6 @@ public class Servlet extends HttpServlet {
 		}catch(Exception e) {
                     e.printStackTrace();
 		}
-		*/
 	}
 	
 	public String check(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
