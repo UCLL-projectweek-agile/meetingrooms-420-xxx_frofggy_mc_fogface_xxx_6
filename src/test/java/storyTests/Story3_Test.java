@@ -79,6 +79,36 @@ public class Story3_Test {
 		if(Collections.frequency(mapke, "Room: HSR-Yangtze@ucll.be")>1){
 			suc =false;
 		}
+		if(Collections.frequency(mapke, "Room: HSR-Schelde@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Sarine@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Rhone@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Po@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Ebro@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Maas@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Douro@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Donau@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Chao-Praya@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Arno@ucll.be")>1){
+			suc =false;
+		}
 		
 	    assertTrue(suc);
 	    
