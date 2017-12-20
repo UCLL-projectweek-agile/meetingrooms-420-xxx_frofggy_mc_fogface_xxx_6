@@ -5,14 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="styles/demo.css">
+<link rel="stylesheet" href="css/demo.css">
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
     <div class="timetable"></div>
 
-    <script src="scripts/timetable.js"></script>
+    <script src="js/timetable.js"></script>
 
     <script>
         var timetable = new Timetable();
