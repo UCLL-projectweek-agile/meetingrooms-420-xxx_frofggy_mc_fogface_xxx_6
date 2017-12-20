@@ -50,11 +50,6 @@ public class Story3_Test {
 		}
 
 	}
-	
-	@Test
-	public void fileStructureCorrect() {
-		
-	}
 
 	@Test
 	public void fileExists() throws FileNotFoundException {
@@ -64,13 +59,32 @@ public class Story3_Test {
 		assertTrue(text.exists());
 	}
 
+	//@Test
+	//public void fileNotEmpty() throws FileNotFoundException {
+	//	assertTrue(!bestandInhoud.isEmpty());
+	//}
+
 	@Test
-	public void fileNotEmpty() throws FileNotFoundException {
-		assertTrue(!bestandInhoud.isEmpty());
+	public void fileStructureCorrect() {
+		
 	}
-
 	
-	
+	//@Test
+	//	public void NoDuplicates() throws FileNotFoundException {
+	//java.util.Map<String, Long> map = new HashMap<>();
+	//  Scanner read = new Scanner(text);
+	//  while (read.hasNext()) {
+	//      String line = read.nextLine();
+	//      if(map.containsKey(line)) {
+	//          fail();
+	//      } else {
+	//          map.put(line, 1L);
+	//      }
+	//   }
 
+	    
+	    
+	    
+	//}
 
 }
