@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -59,32 +60,34 @@ public class Story3_Test {
 		assertTrue(text.exists());
 	}
 
-	//@Test
-	//public void fileNotEmpty() throws FileNotFoundException {
-	//	assertTrue(!bestandInhoud.isEmpty());
-	//}
+	@Test
+	public void fileNotEmpty() throws FileNotFoundException {
+		assertTrue(bestandInhoud.length()>0);
+	}
 
 	@Test
 	public void fileStructureCorrect() {
 		
 	}
 	
-	//@Test
-	//	public void NoDuplicates() throws FileNotFoundException {
-	//java.util.Map<String, Long> map = new HashMap<>();
-	//  Scanner read = new Scanner(text);
-	//  while (read.hasNext()) {
-	//      String line = read.nextLine();
-	//      if(map.containsKey(line)) {
-	//          fail();
-	//      } else {
-	//          map.put(line, 1L);
-	//      }
-	//   }
-
+		@Test
+		public void NoDuplicates() throws FileNotFoundException {
+		Boolean suc = true;	
+			
+		java.util.Map<String, Long> map = new HashMap<>();
+		ArrayList<String> mapke = new ArrayList();
+		Scanner read = new Scanner(text);
+		while (read.hasNext()) {
+	      String line = read.nextLine();
+	      mapke.add(line);
+	   }
+		if(Collections.frequency(mapke, "Room: HSR-Yangtze@ucll.be")>1){
+			suc =false;
+		}
+		
+	    assertTrue(suc);
 	    
 	    
-	    
-	//}
+	}
 
 }
