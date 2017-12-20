@@ -26,7 +26,7 @@ public class OverviewHandler implements RequestHandler{
 	@Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	List<List<Afspraak>> rooms = service.printAppointmentsvoorWeb();
+    	List<Afspraak> rooms = service.printAppointmentsvoorWeb();
     	request.setAttribute("afspraken", rooms);
     	request.getRequestDispatcher("LokaaloverviewOud.jsp").forward(request, response);
     }
