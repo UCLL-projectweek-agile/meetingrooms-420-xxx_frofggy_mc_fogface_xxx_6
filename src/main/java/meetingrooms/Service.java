@@ -12,6 +12,9 @@ import java.util.List;
 import domain.Afspraak;
 import domain.Klant;
 import domain.Lokaal;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.PropertySet;
