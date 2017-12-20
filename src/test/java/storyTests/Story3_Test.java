@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -60,12 +61,14 @@ public class Story3_Test {
 
 	@Test
 	public void fileNotEmpty() throws FileNotFoundException {
-		assertFalse(bestandInhoud.isEmpty());
+		assertTrue(!bestandInhoud.isEmpty());
 	}
 
 	@Test
 	public void fileStructureCorrect() {
 		
 	}
+	
+
 
 }
