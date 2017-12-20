@@ -112,7 +112,7 @@ public class Servlet extends HttpServlet {
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
         List<Appointment> appointments;
-        List<domain.Appointment> appoints = new ArrayList<>();
+        List<domain.Afspraak> appoints = new ArrayList<>();
         try {
             appoints = db.findAllAppointments(startDate, endDate);
             request.setAttribute("appointments", appoints);

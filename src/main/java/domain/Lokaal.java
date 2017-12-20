@@ -6,21 +6,16 @@ public class Lokaal {
 	private String naam;
 	private int stopcontact;
 	private int stoelen;
-	private boolean[] lokaalbezetting = new boolean[24];
+	
 
 	public Lokaal(String lokaalID, String naam, int stopcontact, int stoelen) {
-		this.setLokaalID(naam);
+		this.setLokaalID(lokaalID);
 		this.setNaam(naam);
 		this.setStopcontact(stopcontact);
 		this.setStoelen(stoelen);
 	}
-
-	public boolean[] getLokaalbezetting() {
-		return lokaalbezetting;
-	}
-
-	public void setLokaalbezetting(boolean[] lokaalbezetting) {
-		this.lokaalbezetting = lokaalbezetting;
+	public Lokaal(String lokaalID) {
+		this.setLokaalID(lokaalID);
 	}
 
 	public String getLokaalID() {

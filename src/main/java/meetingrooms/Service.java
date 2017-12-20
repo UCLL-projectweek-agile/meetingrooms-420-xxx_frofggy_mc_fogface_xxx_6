@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 import domain.Klant;
+import domain.Lokaal;
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import microsoft.exchange.webservices.data.core.ExchangeService;
@@ -104,18 +107,17 @@ public class Service {
         CalendarView calendarView = new CalendarView(startDate, endDate);
         FindItemsResults<Appointment> findResults
                 = calendarFolder.findAppointments(calendarView);
-        System.out.println("---------------------------------");
-        System.out.println("Room: "+room);
+        
+       
         List<Klant>klanten = new ArrayList<>();
         for (Appointment appt : findResults.getItems()) {
             appt.load(PropertySet.FirstClassProperties);
-            System.out.println("SUBJECT: " + appt.getSubject());
-            System.out.println("FROM: " + appt.getStart());
-            System.out.println("TILL: " + appt.getEnd());
-            Klant klant = new Klant(appt.getSubject(), appt.getStart(), appt.getEnd());
-            klanten.add(klant);
+//            int start = appt.getStart().getHours() + (appt.getStart().getMinutes() / 60) + (appt.getStart().getSeconds() / 3600); 
+//            int end = appt.getEnd().getHours() + (appt.getEnd().getMinutes() / 60) + (appt.getEnd().getSeconds() / 3600); 
+            Lokaal lokaal = new Lokaal(room);
+   
         }
-        System.out.println("---------------------------------");
+       
         return klanten;
     }
     
@@ -247,7 +249,7 @@ public class Service {
     }
     
 
-    public List<domain.Appointment> getCurrentAppointments() {
+    public List<domain.Afspraak> getCurrentAppointments() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -268,12 +270,12 @@ public class Service {
         }
     }
 
-    public List<domain.Appointment> findAllAppointments(Date startDate, Date endDate) {
+    public List<domain.Afspraak> findAllAppointments(Date startDate, Date endDate) {
         try {
             return db.findAllAppointments(startDate, endDate);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ArrayList<domain.Appointment>();
+        return new ArrayList<domain.Afspraak>();
     }
 }

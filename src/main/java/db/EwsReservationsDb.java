@@ -59,13 +59,13 @@ public class EwsReservationsDb {
         return findResults.getItems();
     }
     
-    public List<domain.Appointment> findAllAppointments(Date startDate, Date endDate) throws Exception{
-        List<domain.Appointment> list = new ArrayList<>();
+    public List<domain.Afspraak> findAllAppointments(Date startDate, Date endDate) throws Exception{
+        List<domain.Afspraak> list = new ArrayList<>();
         for(String r : roomUrls){
             List<Appointment> apps = findAppointments(r, startDate, endDate);
             Lokaal lokaal = new Lokaal(r,r,0,0);
             for(Appointment a : apps){
-                list.add(new domain.Appointment(lokaal, a));
+                list.add(new domain.Afspraak(lokaal, a));
             }
         }
         return list;

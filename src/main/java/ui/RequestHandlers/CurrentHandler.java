@@ -34,7 +34,7 @@ public class CurrentHandler implements RequestHandler{
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
         List<Appointment> appointments;
-        List<domain.Appointment> appoints = new ArrayList<>();
+        List<domain.Afspraak> appoints = new ArrayList<>();
         try {
             //TODO
             appoints = service.findAllAppointments(startDate, endDate);
