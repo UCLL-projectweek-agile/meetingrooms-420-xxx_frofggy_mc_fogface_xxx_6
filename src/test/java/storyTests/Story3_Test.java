@@ -18,7 +18,7 @@ import meetingrooms.Service;
 public class Story3_Test {
 	private File text;
 	private Scanner scnr;
-	private String bestandInhoud = "";
+	private String bestandInhoud;
 
 	@Before
 	public void setUp() throws FileNotFoundException {
@@ -47,7 +47,7 @@ public class Story3_Test {
 		int lineNumber = 1;
 		while (scnr.hasNextLine()) {
 			String line = scnr.nextLine();
-			bestandInhoud += line + "/n";
+			bestandInhoud += scnr.nextLine();
 		}
 
 	}
@@ -62,7 +62,7 @@ public class Story3_Test {
 
 	@Test
 	public void fileNotEmpty() throws FileNotFoundException {
-		assertTrue(bestandInhoud.length()>0);
+		assertFalse(bestandInhoud.isEmpty());
 	}
 
 	@Test
