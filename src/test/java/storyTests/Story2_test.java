@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,13 +15,29 @@ import meetingrooms.Service;
 import microsoft.exchange.webservices.data.core.ExchangeService;
 
 public class Story2_test {
-	Service service = new Service();
+	List<String> rooms;
+	
+	
+	Service service = new Service(rooms);
 
 	ExchangeService services = new ExchangeService();
 	String string = "---------------------------------\nRoom: .*$\nSUBJECT: .*$\nFROM: .*CET.*$\nTILL: .*CETs.*$\n---------------------------------";
 	
 	@Before
 	public void setUp() {
+		List<String> rooms = new ArrayList<>();
+        rooms.add("HSR-Yangtze@ucll.be");
+        rooms.add("HSR-Schelde@ucll.be");
+        rooms.add("HSR-Sarine@ucll.be");
+        rooms.add("HSR-Rhone@ucll.be");
+        rooms.add("HSR-Po@ucll.be");
+        rooms.add("HSR-Ebro@ucll.be");
+        rooms.add("HSR-Maas@ucll.be");
+        rooms.add("HSR-Douro@ucll.be");
+        rooms.add("HSR-Donau@ucll.be");
+        rooms.add("HSR-Chao-Praya@ucll.be");
+        rooms.add("HSR-Arno@ucll.be");
+		
 		try {
 			service.logIn("HSR-Yangtze@ucll.be", services);
 		} catch (Exception e) {

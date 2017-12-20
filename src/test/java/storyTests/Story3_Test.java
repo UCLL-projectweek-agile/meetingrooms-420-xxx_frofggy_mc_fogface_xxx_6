@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Before;
@@ -19,7 +21,20 @@ public class Story3_Test {
 
 	@Before
 	public void setUp() throws FileNotFoundException {
-		Service service = new Service();
+		List<String> rooms = new ArrayList<>();
+        rooms.add("HSR-Yangtze@ucll.be");
+        rooms.add("HSR-Schelde@ucll.be");
+        rooms.add("HSR-Sarine@ucll.be");
+        rooms.add("HSR-Rhone@ucll.be");
+        rooms.add("HSR-Po@ucll.be");
+        rooms.add("HSR-Ebro@ucll.be");
+        rooms.add("HSR-Maas@ucll.be");
+        rooms.add("HSR-Douro@ucll.be");
+        rooms.add("HSR-Donau@ucll.be");
+        rooms.add("HSR-Chao-Praya@ucll.be");
+        rooms.add("HSR-Arno@ucll.be");
+		
+		Service service = new Service(rooms);
 		service.printAppointmentsNow();
 		service.printAppointmentsToday();
 
