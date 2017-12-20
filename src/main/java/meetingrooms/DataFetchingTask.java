@@ -10,8 +10,12 @@ import domain.Afspraak;
 import domain.Lokaal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.PropertySet;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
@@ -42,67 +46,35 @@ public class DataFetchingTask implements Runnable {
         db = new EwsReservationsDb(rooms, credentials);
     }
 
-    private void logIn(String room, ExchangeService service) throws Exception {
-        // user with read access for room information
-        ExchangeCredentials credentials
-                = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
-        //user gets privileges of room
-        ImpersonatedUserId impersonatedUserId = new ImpersonatedUserId(ConnectingIdType.SmtpAddress, room);
-        service.setImpersonatedUserId(impersonatedUserId);
-        service.setCredentials(credentials);
-        //find url to send request to (you can check: service.getUrl());
-        service.autodiscoverUrl(room);
-    }
-
     @Override
     public void run() {
-        this.afspraken = getAppointments();
+        
+        Logger.getLogger(DataFetchingTask.class.getName()).log(Level.INFO, null, "Fetch");
+        Calendar calStart = new GregorianCalendar();
+        calStart.setTime(new Date());
+        calStart.set(Calendar.HOUR_OF_DAY, 0);
+        calStart.set(Calendar.MINUTE, 0);
+        calStart.set(Calendar.SECOND, 0);
+        calStart.set(Calendar.MILLISECOND, 0);
+        Date midnightYesterday = calStart.getTime();
+
+        Calendar calEnd = new GregorianCalendar();
+        calEnd.setTime(new Date());
+        calEnd.set(Calendar.DAY_OF_YEAR, calEnd.get(Calendar.DAY_OF_YEAR)+1);
+        calEnd.set(Calendar.HOUR_OF_DAY, 0);
+        calEnd.set(Calendar.MINUTE, 0);
+        calEnd.set(Calendar.SECOND, 0);
+        calEnd.set(Calendar.MILLISECOND, 0);
+        Date midnightTonight = calEnd.getTime();
+        try {
+            this.afspraken = db.findAllAppointments(midnightYesterday, midnightTonight);
+        } catch (Exception ex) {
+            Logger.getLogger(DataFetchingTask.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<Afspraak> getAfspraken(){
         return afspraken;
-    }
-    
-    private List<Afspraak> getAppointmentsForRoom(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
-
-        //binds to the calendar folder of the room
-        Mailbox mailbox = new Mailbox(room);
-        FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
-        CalendarFolder calendarFolder = CalendarFolder.bind(service, folderId);
-        //read calendar of room
-        CalendarView calendarView = new CalendarView(startDate, endDate);
-        FindItemsResults<Appointment> findResults
-                = calendarFolder.findAppointments(calendarView);
-
-        List<Afspraak> afspraken = new ArrayList<>();
-        for (Appointment appt : findResults.getItems()) {
-            appt.load(PropertySet.FirstClassProperties);
-//            int start = appt.getStart().getHours() + (appt.getStart().getMinutes() / 60) + (appt.getStart().getSeconds() / 3600); 
-//            int end = appt.getEnd().getHours() + (appt.getEnd().getMinutes() / 60) + (appt.getEnd().getSeconds() / 3600); 
-            Lokaal lokaal = new Lokaal(room);
-            Afspraak afspraak = new Afspraak(lokaal, appt);
-            afspraken.add(afspraak);
-        }
-        return afspraken;
-    }
-
-    private List<Afspraak> getAppointments() {
-        ExchangeService service = new ExchangeService();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date startDate = new Date();
-        Date endDate = new Date();
-        endDate.setTime(endDate.getTime() + 3600000);
-        List<Afspraak> roomse = new ArrayList<>();
-
-        for (String r : rooms) {
-            try {
-                logIn(r, service);
-                roomse.addAll(getAppointmentsForRoom(r, service, startDate, endDate));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        return roomse;
     }
 
 }
