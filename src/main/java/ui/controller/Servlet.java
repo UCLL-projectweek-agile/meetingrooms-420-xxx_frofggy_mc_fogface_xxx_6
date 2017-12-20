@@ -1,6 +1,7 @@
 package ui.controller;
 
 import db.EwsReservationsDb;
+import domain.Afspraak;
 import domain.Klant;
 import meetingrooms.Service;
 
@@ -116,7 +117,7 @@ public class Servlet extends HttpServlet {
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
         List<Appointment> appointments;
-        List<domain.Afspraak> appoints = new ArrayList<>();
+        List<Afspraak> appoints = new ArrayList<>();
         try {
             appoints = db.findAllAppointments(startDate, endDate);
             request.setAttribute("appointments", appoints);
@@ -129,9 +130,9 @@ public class Servlet extends HttpServlet {
     private String overview(HttpServletRequest request, HttpServletResponse response) {
     	
     	Service service = new Service();
-    	List<List<Klant>> rooms = service.printAppointmentsvoorWeb();
+    	List<List<Afspraak>> rooms = service.printAppointmentsvoorWeb();
     	service.printAppointmentsvoorWeb();
-    	request.setAttribute("klanten", rooms);
+    	request.setAttribute("afspraken", rooms);
     	return "LokaaloverviewOud.jsp";
     }
 		
