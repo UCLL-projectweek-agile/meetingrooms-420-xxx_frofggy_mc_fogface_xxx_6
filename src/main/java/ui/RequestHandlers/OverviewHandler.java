@@ -23,7 +23,7 @@ public class OverviewHandler implements RequestHandler{
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Service service = new Service();
-    	List<Klant> klanten = service.printAppointmentsvoorWeb();
+    	List<List<Klant>> klanten = service.printAppointmentsvoorWeb();
     	service.printAppointmentsvoorWeb();
     	request.setAttribute("klanten", klanten);
     	request.getRequestDispatcher("Lokaaloverview.jsp").forward(request, response);

@@ -6,7 +6,7 @@ public class Klant {
 	private String naam;
 	private Date beginuur;
 	private Date einduur;
-	
+	private boolean beschikbaar;
 	
 	
 	public Klant(String naam, Date beginuur, Date einduur) {
@@ -15,6 +15,14 @@ public class Klant {
 		this.einduur = einduur;
 	}
 	
+	private boolean isBeschikbaar() {
+		return beschikbaar;
+	}
+
+	private void setBeschikbaar(boolean beschikbaar) {
+		this.beschikbaar = beschikbaar;
+	}
+
 	public String getNaam() {
 		return naam;
 	}
