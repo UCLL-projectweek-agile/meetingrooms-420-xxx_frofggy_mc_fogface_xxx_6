@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import meetingrooms.Service;
-import microsoft.exchange.webservices.data.core.ExchangeService;
 
 public class Story3_Test {
 	private File text;
