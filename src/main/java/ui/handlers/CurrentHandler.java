@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.RequestHandlers;
+package ui.handlers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class CurrentHandler implements RequestHandler{
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
         List<Appointment> appointments;
-        List<domain.Appointment> appoints = new ArrayList<>();
+        List<domain.Afspraak> appoints = new ArrayList<>();
         try {
             //TODO
             appoints = service.findAllAppointments(startDate, endDate);

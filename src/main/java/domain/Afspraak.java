@@ -12,11 +12,11 @@ import microsoft.exchange.webservices.data.core.PropertySet;
  *
  * @author Daan
  */
-public class Appointment {
+public class Afspraak {
     
     private Lokaal lokaal;
 
-    public Appointment(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
+    public Afspraak(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
        setLokaal(lokaal);
        
         appt.load(PropertySet.FirstClassProperties);
@@ -50,13 +50,13 @@ public class Appointment {
     private Date startDate;
     private Date endDate;
     
-    public Appointment(Lokaal lokaal, Date startDate, Date endDate){
+    public Afspraak(Lokaal lokaal, Date startDate, Date endDate){
         this.lokaal = lokaal;
         this.startDate = startDate;
         this.endDate = endDate;
     }
     
-    public Appointment(){
+    public Afspraak(){
         
     }
     
