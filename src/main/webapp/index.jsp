@@ -3,9 +3,9 @@
 
 <img id="Image-Maps-Com-image-maps-2017-12-20-045103" src="http://www.image-maps.com/m/private/0/7dheqfeqdn2h2hlplpbtmjtsa4_maplokalen.png" border="0" width="1422" height="269" orgWidth="1422" orgHeight="269" usemap="#image-maps-2017-12-20-045103" alt="" />
 <map name="image-maps-2017-12-20-045103" id="ImageMapsCom-image-maps-2017-12-20-045103">
-<area style="color:green" id="D160" alt="" title="D160" href="http://www.image-maps.com/" shape="rect" coords="2,14,151,145" style="outline:none;" target="_self"     />
-<area style="color:green" id="D159" alt="" title="D159" href="http://www.image-maps.com/" shape="rect" coords="2,151,191,269" style="outline:none;" target="_self"     />
-<area style="color:green" id="D156" alt="" title="D156" href="http://www.image-maps.com/" shape="rect" coords="195,150,383,268" style="outline:none;" target="_self"     />
+<area style="background-color:#00ff00" id="D160" alt="" title="D160" href="http://www.image-maps.com/" shape="rect" coords="2,14,151,145" style="outline:none;" target="_self"     />
+<area style="color:#00ff00" id="D159" alt="" title="D159" href="http://www.image-maps.com/" shape="rect" coords="2,151,191,269" style="outline:none;" target="_self"     />
+<area style="color:#00ff" id="D156" alt="" title="D156" href="http://www.image-maps.com/" shape="rect" coords="195,150,383,268" style="outline:none;" target="_self"     />
 <area style="color:green" id="D157" alt="" title="D157" href="http://www.image-maps.com/" shape="rect" coords="239,10,339,145" style="outline:none;" target="_self"     />
 <area style="color:green" id="D154" alt="" title="D154" href="http://www.image-maps.com/" shape="rect" coords="426,14,574,145" style="outline:none;" target="_self"     />
 <area style="color:green" id="D155" alt="" title="D155" href="http://www.image-maps.com/" shape="rect" coords="387,151,574,269" style="outline:none;" target="_self"     />
