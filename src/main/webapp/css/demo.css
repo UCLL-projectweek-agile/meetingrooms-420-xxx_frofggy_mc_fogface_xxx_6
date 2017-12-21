@@ -20,12 +20,13 @@ a {
     font-weight: 500
 }
 .timetable {
-    text-align: center;
+    /**text-align: center;**/
     display: flex;
     flex-direction: row;
     align-items: stretch;
     width: 100%;
-    box-sizing: border-box
+    box-sizing: border-box;
+    margin:auto;
 }
 
 .timetable::after {
@@ -217,4 +218,8 @@ a {
 
 .timetable .time-entry:hover {
     background-color: #e74030
+}
+section{
+	margin:0;
+	padding:0;
 }
