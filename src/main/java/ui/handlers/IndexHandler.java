@@ -27,7 +27,7 @@ private Service service;
        System.out.println(lokalenKleuren);
        for(String lokaal : lokalenKleuren.keySet()){
            if(lokaal != null){
-               request.setAttribute(lokaal, lokalenKleuren.get(lokaal) ? "green" : "red");
+               request.setAttribute(lokaal, lokalenKleuren.get(lokaal) ? "red" : "green");
            }
        }
        request.getRequestDispatcher("index.jsp").forward(request,response);
