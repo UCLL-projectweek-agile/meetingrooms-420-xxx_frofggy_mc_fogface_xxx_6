@@ -28,7 +28,7 @@ public class OverviewHandler implements RequestHandler{
     	
     	List<Afspraak> rooms = service.printAppointmentsvoorWeb();
     	request.setAttribute("afspraken", rooms);
-    	request.getRequestDispatcher("LokaaloverviewOud.jsp").forward(request, response);
+    	request.getRequestDispatcher("Lokaaloverview.jsp").forward(request, response);
     }
 
     @Override
