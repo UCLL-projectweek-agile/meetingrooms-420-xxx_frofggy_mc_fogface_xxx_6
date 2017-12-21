@@ -6,15 +6,19 @@
 package db;
 
 import domain.Lokaal;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
 import microsoft.exchange.webservices.data.core.enumeration.property.WellKnownFolderName;
 import microsoft.exchange.webservices.data.core.service.folder.CalendarFolder;
 import microsoft.exchange.webservices.data.core.service.item.Appointment;
-import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
 import microsoft.exchange.webservices.data.misc.ImpersonatedUserId;
 import microsoft.exchange.webservices.data.property.complex.FolderId;
 import microsoft.exchange.webservices.data.property.complex.Mailbox;
@@ -32,17 +36,23 @@ public class EwsReservationsDb {
     public EwsReservationsDb(List<Lokaal> rooms, ExchangeService service){
         this.rooms = rooms;
         this.service = service;
+        try {
+            discover();
+        } catch (Exception ex) {
+            Logger.getLogger(EwsReservationsDb.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    private void logIn(String room) throws Exception {
-        ImpersonatedUserId impersonatedUserId = new ImpersonatedUserId(ConnectingIdType.SmtpAddress, room);
-        service.setImpersonatedUserId(impersonatedUserId);
-        service.autodiscoverUrl(room);
+    private void discover() throws Exception{
+        service.autodiscoverUrl(rooms.get(0).getLokaalID());
+        System.out.println(service.getUrl());
     }
     
     public List<Appointment> findAppointments(String room, Date startDate, Date endDate) throws Exception {
-        logIn(room);
-        //binds to the calendar folder of the room
+        
+        ImpersonatedUserId impersonatedUserId = new ImpersonatedUserId(ConnectingIdType.SmtpAddress, room);
+        service.setImpersonatedUserId(impersonatedUserId);
+        
         Mailbox mailbox = new Mailbox(room);
         FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
         CalendarFolder calendarFolder = CalendarFolder.bind(service, folderId);
@@ -53,16 +63,17 @@ public class EwsReservationsDb {
         return findResults.getItems();
     }
     
+    public List<Appointment> findAppointments(Lokaal room, Date startDate, Date endDate) throws Exception {
+        return this.findAppointments(room.getLokaalID(), startDate, endDate);
+    }
+    
     public List<domain.Afspraak> findAllAppointments(Date startDate, Date endDate) throws Exception{
         List<domain.Afspraak> list = new ArrayList<>();
         for(Lokaal room : rooms){
             String r = room.getLokaalID();
             List<Appointment> apps = findAppointments(r, startDate, endDate);
-            String rsub = r.substring(4);
-            rsub = rsub.split("@")[0];
-            Lokaal lokaal = new Lokaal(r,rsub,0,0);
             for(Appointment a : apps){
-                list.add(new domain.Afspraak(lokaal, a));
+                list.add(new domain.Afspraak(room, a));
             }
         }
         return list;
@@ -72,7 +83,7 @@ public class EwsReservationsDb {
         List<Appointment> list = new ArrayList<>();
         for(Lokaal room : rooms){
             String r = room.getLokaalID();
-            List<Appointment> apps = findAppointments(r, startDate, endDate);
+            List<Appointment> apps = findAppointments(r,startDate, endDate);
             list.addAll(apps);
         }
         return list;
