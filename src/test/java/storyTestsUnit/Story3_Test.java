@@ -1,4 +1,4 @@
-package storyTests;
+package storyTestsUnit;
 
 import db.EwsReservationsDb;
 import db.RoomInMemoryDb;

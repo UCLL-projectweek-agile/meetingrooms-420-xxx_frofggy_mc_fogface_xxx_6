@@ -4,9 +4,7 @@
 <jsp:include page="header.jsp">
 <jsp:param value="Timetable" name="pageTitle"/>
 </jsp:include>
-
-	<div class="timetable"></div>
-
+	<div class="timetable"><div style="margin:auto"></div></div>
 	<script src="js/timetable.js"></script>
 	<div id="afspraak">
 		<c:forEach var="afspraak" items="${afspraken}">
@@ -25,7 +23,9 @@
         
         //set the starttime and the endtime to whatever is specified
         //can update the fist parameter to the hour that is current later
-        timetable.setScope(7, 23)
+        var date = new Date();
+        var hour = date.getHours();
+        timetable.setScope(hour, 23)
         //this will hold the different spaces -- Name of the river
         //static
        
@@ -33,7 +33,6 @@
         //adds the reservetion to the river
         //(Subject, name river, date start, date end, { can add a url if wanted later})
 		var x = document.getElementById("afspraak").children
-		console.log(x);
 		for (var i = 0; i < x.length; i++) {
        	timetable.addEvent(x[i].getAttribute('description'), x[i].getAttribute('lokaal'), new Date(x[i].getAttribute('startYear'),x[i].getAttribute('startMonth'),x[i].getAttribute('startDay'), x[i].getAttribute('startHour'),x[i].getAttribute('startMinute')), 
        			new Date(x[i].getAttribute('endYear'),x[i].getAttribute('endMonth'),x[i].getAttribute('endDay'), x[i].getAttribute('endHour'),x[i].getAttribute('endMinute')));
