@@ -45,12 +45,12 @@ public class Story3_Test {
 
 		scnr = new Scanner(text);
 
-		// Reading each line of file using Scanner class
-		int lineNumber = 1;
-		while (scnr.hasNextLine()) {
-			String line = scnr.nextLine();
-			bestandInhoud += scnr.nextLine();
-		}
+//		// Reading each line of file using Scanner class
+//		int lineNumber = 1;
+//		while (scnr.hasNextLine()) {
+//			String line = scnr.nextLine();
+//			bestandInhoud += scnr.nextLine();
+//		}
 
 	}
 
@@ -111,7 +111,12 @@ public class Story3_Test {
 		if(Collections.frequency(mapke, "Room: HSR-Arno@ucll.be")>1){
 			suc =false;
 		}
-		
+		if(Collections.frequency(mapke, "Room: HSR-Thames@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Moselle@ucll.be")>1){
+			suc =false;
+		}
 	    assertTrue(suc);
 	    
 	    
