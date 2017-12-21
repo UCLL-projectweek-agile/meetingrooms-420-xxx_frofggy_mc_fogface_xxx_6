@@ -5,6 +5,7 @@
  */
 package ui.handlers;
 
+import domain.Lokaal;
 import java.io.IOException;
 import java.util.Map;
 
@@ -23,7 +24,12 @@ private Service service;
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        Map<String, Boolean> lokalenKleuren = service.getCurrentOccupation();
-    	request.getRequestDispatcher("index.jsp").forward(request,response);
+       for(String lokaal : lokalenKleuren.keySet()){
+           if(lokaal != null){
+               request.setAttribute(lokaal, lokalenKleuren.get(lokaal) ? "green" : "red");
+           }
+       }
+       request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 
     @Override

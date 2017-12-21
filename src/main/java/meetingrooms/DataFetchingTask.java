@@ -14,8 +14,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
-import microsoft.exchange.webservices.data.credential.WebCredentials;
 
 /**
  *
@@ -26,9 +24,8 @@ public class DataFetchingTask implements Runnable {
     private final EwsReservationsDb db;
     private List<Afspraak> afspraken;
     
-    public DataFetchingTask(List<Lokaal> rooms) {
-        ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
-        db = new EwsReservationsDb(rooms, credentials);
+    public DataFetchingTask(List<Lokaal> rooms, EwsReservationsDb ews) {
+        db = ews;
     }
 
     @Override

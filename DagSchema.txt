@@ -11,6 +11,9 @@ Room: HSR-Yangtze@ucll.be
 SUBJECT: project 2TX
 FROM: Thu Dec 21 12:00:00 CET 2017
 TILL: Thu Dec 21 12:30:00 CET 2017
+SUBJECT: ELKE STEEGMANS TEST
+FROM: Thu Dec 21 14:00:00 CET 2017
+TILL: Thu Dec 21 16:00:00 CET 2017
 ------------------------------------------------------------------
 Room: HSR-Schelde@ucll.be
 SUBJECT: scriptievergadering 

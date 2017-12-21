@@ -49,10 +49,10 @@ public class Service {
     private List<Afspraak> afspraken;
     private double lastChecked;
 
-    public Service(List<Lokaal> rooms) {
+    public Service(List<Lokaal> rooms, EwsReservationsDb ews) {
         this.rooms = rooms;
         ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
-        db = new EwsReservationsDb(rooms, credentials);
+        db = ews;
     }
 
     public void logIn(String room, ExchangeService service) throws Exception {
