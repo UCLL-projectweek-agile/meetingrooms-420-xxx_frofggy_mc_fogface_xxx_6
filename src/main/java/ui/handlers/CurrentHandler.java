@@ -29,15 +29,10 @@ public class CurrentHandler implements RequestHandler{
     
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        Date startDate = new Date();
-        Date endDate = new Date();
-        endDate.setTime(endDate.getTime() + 3600000);
-        List<Appointment> appointments;
-        List<domain.Afspraak> appoints = new ArrayList<>();
+        List<domain.Afspraak> appoints;
         try {
             //TODO
-            appoints = service.findAllAppointments(startDate, endDate);
+            appoints = service.getAppointmentsToday();
             request.setAttribute("afspraken", appoints);
         } catch (Exception ex) {
             Logger.getLogger(Servlet.class.getName()).log(Level.SEVERE, null, ex);
