@@ -6,6 +6,7 @@
 package domain;
 
 import java.util.Calendar;
+
 import java.util.Date;
 import microsoft.exchange.webservices.data.core.PropertySet;
 
@@ -14,6 +15,12 @@ import microsoft.exchange.webservices.data.core.PropertySet;
  * @author Daan
  */
 public class Afspraak {
+	
+	private int afspraakid;
+	private String lokaalid;
+	private String subject;
+	private Date startDate2_0;
+	private Date endDate2_0;
 	
     private Lokaal lokaal;
     private String desc;
@@ -32,8 +39,13 @@ public class Afspraak {
     private int endMonth;
     private int endDay;
     
-    
-    
+    public Afspraak(int afspraakid, String lokaalid, Date startdate, Date enddate, String subject){
+    	this.setAfspraakid(afspraakid);
+    	this.setLokaalid(lokaalid);
+    	this.setStartDate(toCalendar(startdate));
+    	this.setEndDate(toCalendar(enddate));
+    	this.setSubject(subject);
+    }
 
     public Afspraak(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
         this.setLokaal(lokaal);
@@ -208,6 +220,56 @@ public class Afspraak {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+
+	public int getAfspraakid() {
+		return afspraakid;
+	}
+
+
+	public void setAfspraakid(int afspraakid) {
+		this.afspraakid = afspraakid;
+	}
+
+
+
+	public String getLokaalid() {
+		return lokaalid;
+	}
+
+
+
+	public void setLokaalid(String lokaalid) {
+		this.lokaalid = lokaalid;
+	}
+
+
+
+	public String getSubject() {
+		return subject;
+	}
+
+
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public Date getStartDate2_0() {
+		return startDate2_0;
+	}
+
+	public void setStartDate2_0(Date startDate2_0) {
+		this.startDate2_0 = startDate2_0;
+	}
+
+	public Date getEndDate2_0() {
+		return endDate2_0;
+	}
+
+	public void setEndDate2_0(Date endDate2_0) {
+		this.endDate2_0 = endDate2_0;
 	}
 	
 	public boolean isDuring(Calendar time) {
