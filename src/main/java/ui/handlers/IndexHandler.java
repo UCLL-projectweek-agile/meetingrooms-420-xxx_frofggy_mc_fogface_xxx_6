@@ -22,7 +22,7 @@ public class IndexHandler implements RequestHandler{
 private Service service;
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       Map<String, String> lokalenKleuren = service.getCurrentOccupation();
+       Map<String, Boolean> lokalenKleuren = service.getCurrentOccupation();
     	request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 

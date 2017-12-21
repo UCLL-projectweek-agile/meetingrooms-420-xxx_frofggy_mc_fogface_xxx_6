@@ -8,27 +8,14 @@ package meetingrooms;
 import db.EwsReservationsDb;
 import domain.Afspraak;
 import domain.Lokaal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import microsoft.exchange.webservices.data.core.ExchangeService;
-import microsoft.exchange.webservices.data.core.PropertySet;
-import microsoft.exchange.webservices.data.core.enumeration.misc.ConnectingIdType;
-import microsoft.exchange.webservices.data.core.enumeration.property.WellKnownFolderName;
-import microsoft.exchange.webservices.data.core.service.folder.CalendarFolder;
-import microsoft.exchange.webservices.data.core.service.item.Appointment;
 import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
 import microsoft.exchange.webservices.data.credential.WebCredentials;
-import microsoft.exchange.webservices.data.misc.ImpersonatedUserId;
-import microsoft.exchange.webservices.data.property.complex.FolderId;
-import microsoft.exchange.webservices.data.property.complex.Mailbox;
-import microsoft.exchange.webservices.data.search.CalendarView;
-import microsoft.exchange.webservices.data.search.FindItemsResults;
 
 /**
  *
@@ -36,12 +23,10 @@ import microsoft.exchange.webservices.data.search.FindItemsResults;
  */
 public class DataFetchingTask implements Runnable {
 
-    private List<String> rooms;
     private final EwsReservationsDb db;
     private List<Afspraak> afspraken;
     
-    public DataFetchingTask(List<String> rooms) {
-        this.rooms = rooms;
+    public DataFetchingTask(List<Lokaal> rooms) {
         ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
         db = new EwsReservationsDb(rooms, credentials);
     }

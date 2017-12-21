@@ -22,7 +22,7 @@ import ui.controller.Servlet;
  *
  * @author Daan
  */
-@Mapping("current")
+@Mapping("timetable")
 public class CurrentHandler implements RequestHandler{
 
     private Service service;
@@ -37,7 +37,7 @@ public class CurrentHandler implements RequestHandler{
         } catch (Exception ex) {
             Logger.getLogger(Servlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.getRequestDispatcher("DemoTime.jsp").forward(request, response);
+        request.getRequestDispatcher("TimeTable.jsp").forward(request, response);
     }
 
     @Override

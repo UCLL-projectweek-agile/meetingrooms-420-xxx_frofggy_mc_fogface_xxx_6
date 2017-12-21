@@ -27,11 +27,11 @@ import microsoft.exchange.webservices.data.search.FindItemsResults;
  */
 public class EwsReservationsDb {
     
-    private final List<String> roomUrls;
+    private final List<Lokaal> rooms;
     private final ExchangeService service;
     private final ExchangeCredentials credentials;
-    public EwsReservationsDb(List<String> roomUrls, ExchangeCredentials credentials){
-        this.roomUrls = roomUrls;
+    public EwsReservationsDb(List<Lokaal> rooms, ExchangeCredentials credentials){
+        this.rooms = rooms;
         service = new ExchangeService();
         this.credentials = credentials;
     }
@@ -61,7 +61,8 @@ public class EwsReservationsDb {
     
     public List<domain.Afspraak> findAllAppointments(Date startDate, Date endDate) throws Exception{
         List<domain.Afspraak> list = new ArrayList<>();
-        for(String r : roomUrls){
+        for(Lokaal room : rooms){
+            String r = room.getLokaalID();
             List<Appointment> apps = findAppointments(r, startDate, endDate);
             String rsub = r.substring(4);
             rsub = rsub.split("@")[0];
@@ -75,7 +76,8 @@ public class EwsReservationsDb {
     
     public List<Appointment> findAllEwsAppointments(Date startDate, Date endDate) throws Exception{
         List<Appointment> list = new ArrayList<>();
-        for(String r : roomUrls){
+        for(Lokaal room : rooms){
+            String r = room.getLokaalID();
             List<Appointment> apps = findAppointments(r, startDate, endDate);
             list.addAll(apps);
         }
