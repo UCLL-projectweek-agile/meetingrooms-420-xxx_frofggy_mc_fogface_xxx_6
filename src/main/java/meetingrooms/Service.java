@@ -51,7 +51,6 @@ public class Service {
 
     public Service(List<Lokaal> rooms, EwsReservationsDb ews) {
         this.rooms = rooms;
-        ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
         db = ews;
     }
 
@@ -93,12 +92,12 @@ public class Service {
     public List<String> stringFindAppointments(ExchangeService service, Date startDate, Date endDate) throws Exception {
         List<String> string = new ArrayList<>();
         for (Lokaal room : rooms) {
-            string.add(stringFindAppointmentsForRoom(room.getLokaalID(), startDate, endDate));
+            string.add(stringFindAppointmentsForRoom(room, startDate, endDate));
         }
         return string;
     }
 
-    private String stringFindAppointmentsForRoom(String room, Date startDate, Date endDate) throws Exception {
+    private String stringFindAppointmentsForRoom(Lokaal room, Date startDate, Date endDate) throws Exception {
         String appointment;
         List<Appointment> findResults = db.findAppointments(room, startDate, endDate);
         appointment = "---------------------------------\n";

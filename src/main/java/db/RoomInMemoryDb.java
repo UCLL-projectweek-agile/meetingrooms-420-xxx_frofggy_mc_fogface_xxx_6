@@ -19,6 +19,7 @@ public class RoomInMemoryDb implements RoomDb{
     
     public RoomInMemoryDb(){
         rooms = new ArrayList<>();
+        //D149 D148 D159 D146 D157 D145 D156 D144 D155 D143 D154 D153 D160
         rooms.add(new Lokaal("HSR-Thames@ucll.be","Thames","D143",0,0));
         rooms.add(new Lokaal("HSR-Yangtze@ucll.be","Yangtze","D144",0,0));
         rooms.add(new Lokaal("HSR-Schelde@ucll.be","Schelde","D145",0,0));
