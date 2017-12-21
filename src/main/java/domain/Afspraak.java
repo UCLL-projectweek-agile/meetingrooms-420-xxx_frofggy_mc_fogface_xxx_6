@@ -33,6 +33,7 @@ public class Afspraak {
     private int endDay;
     
     
+    
 
     public Afspraak(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
         this.setLokaal(lokaal);

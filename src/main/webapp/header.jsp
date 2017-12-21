@@ -21,8 +21,6 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="Servlet?action=index">Home</a></li>
       <li><a href="Servlet?action=current">Overzicht</a></li>
-      <li><a href="Servlet?action=overview">lokaalOverview</a></li>
-      <li><a href="Servlet?action=timetable">Timetable Demo</a></li>
     </ul>
   </div>
 </nav>

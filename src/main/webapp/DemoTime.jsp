@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,26 +11,22 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
-    <div class="timetable"></div>
+	<div class="timetable"></div>
 
-    <script src="js/timetable.js"></script>
-    <div id="afspraak">
-	<c:forEach var="afspraak" items="${afspraken}">
-		<afspraak startYear="${afspraak.startYear }" 
-		endYear="${afspraak.endYear }" 
-		startMonth="${afspraak.startMonth }" 
-		endMonth="${afspraak.endMonth}" 
-		startDay="${afspraak.startDay}" 
-		endDay="${afspraak.endDay }"
-		startHour="${afspraak.startHour }"
-		endHour="${afspraak.endHour }"
-		startMinute="${afspraak.startMinute }"
-		endMinute="${afspraak.endMinute }"
-		lokaal="${afspraak.lokaal }"
-		description="${afspraak.desc }"></afspraak>
-	</c:forEach>
+	<script src="js/timetable.js"></script>
+	<div id="afspraak">
+		<c:forEach var="afspraak" items="${afspraken}">
+			<afspraak startYear="${afspraak.startYear }"
+				endYear="${afspraak.endYear }" startMonth="${afspraak.startMonth }"
+				endMonth="${afspraak.endMonth}" startDay="${afspraak.startDay}"
+				endDay="${afspraak.endDay }" startHour="${afspraak.startHour }"
+				endHour="${afspraak.endHour }"
+				startMinute="${afspraak.startMinute }"
+				endMinute="${afspraak.endMinute }" lokaal="${afspraak.lokaal }"
+				description="${afspraak.desc }"></afspraak>
+		</c:forEach>
 	</div>
-    <script>
+	<script>
         var timetable = new Timetable();
         
         //set the starttime and the endtime to whatever is specified
@@ -52,5 +48,4 @@
         renderer.draw('.timetable');
         //CopyRight goes to Grible, no site only github: //https://github.com/Grible/timetable.js
     </script>
-</body>
-</html>
+<jsp:include page="footer.jsp"></jsp:include>
