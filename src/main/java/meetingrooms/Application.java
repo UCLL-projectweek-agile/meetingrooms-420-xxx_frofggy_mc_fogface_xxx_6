@@ -5,8 +5,13 @@
  */
 package meetingrooms;
 
-import java.util.ArrayList;
+import db.EwsReservationsDb;
+import db.RoomInMemoryDb;
+import domain.Lokaal;
 import java.util.List;
+import microsoft.exchange.webservices.data.core.ExchangeService;
+import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
+import microsoft.exchange.webservices.data.credential.WebCredentials;
 
 /**
  *
@@ -16,19 +21,11 @@ public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        List<String> rooms = new ArrayList<>();
-        rooms.add("HSR-Yangtze@ucll.be");
-        rooms.add("HSR-Schelde@ucll.be");
-        rooms.add("HSR-Sarine@ucll.be");
-        rooms.add("HSR-Rhone@ucll.be");
-        rooms.add("HSR-Po@ucll.be");
-        rooms.add("HSR-Ebro@ucll.be");
-        rooms.add("HSR-Maas@ucll.be");
-        rooms.add("HSR-Douro@ucll.be");
-        rooms.add("HSR-Donau@ucll.be");
-        rooms.add("HSR-Chao-Praya@ucll.be");
-        rooms.add("HSR-Arno@ucll.be");
-        Service service = new Service(rooms);
+        List<Lokaal> rooms = (new RoomInMemoryDb()).getRooms();
+        ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
+        ExchangeService exchange = new ExchangeService();
+        exchange.setCredentials(credentials);
+        Service service = new Service(rooms, new EwsReservationsDb(rooms, exchange));
         //Daans work to get appointments for now
         service.printAppointmentsNow();
         //Arnolds work to get txt file for whole day

@@ -1,7 +1,6 @@
 package meetingrooms;
 
 import db.EwsReservationsDb;
-import db.ReservationDb;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import domain.Afspraak;
-import domain.Klant;
 import domain.Lokaal;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -45,18 +43,16 @@ import microsoft.exchange.webservices.data.search.FindItemsResults;
  */
 public class Service {
 
-    private ExchangeService service = new ExchangeService();
+    private final EwsReservationsDb db;
 
-    private List<String> rooms = new ArrayList<>();
+    private List<Lokaal> rooms = new ArrayList<>();
     private List<Afspraak> afspraken;
     private double lastChecked;
-    private final EwsReservationsDb db;
-    private ReservationDb reservationDb;
 
-    public Service(List<String> rooms) {
+    public Service(List<Lokaal> rooms, EwsReservationsDb ews) {
         this.rooms = rooms;
         ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
-        db = new EwsReservationsDb(rooms, credentials);
+        db = ews;
     }
 
     public void logIn(String room, ExchangeService service) throws Exception {
@@ -95,10 +91,9 @@ public class Service {
     }
 
     public List<String> stringFindAppointments(ExchangeService service, Date startDate, Date endDate) throws Exception {
-
         List<String> string = new ArrayList<>();
-        for (String room : rooms) {
-            string.add(stringFindAppointmentsForRoom(room, startDate, endDate));
+        for (Lokaal room : rooms) {
+            string.add(stringFindAppointmentsForRoom(room.getLokaalID(), startDate, endDate));
         }
         return string;
     }
@@ -154,7 +149,7 @@ public class Service {
             } catch (Exception ex) {
                 Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return roomse;
+            return afspraken;
         }
     }
 
@@ -214,19 +209,19 @@ public class Service {
         return null;
     }
 
-    public Map<String, String> getCurrentOccupation() {
-    	Map<String, Boolean> bezet = new HashMap<>();
-    	for (Afspraak afspraak : afspraken) {
-			
-		}
+    public Map<String, Boolean> getCurrentOccupation() {
+        Map<String, Boolean> bezet = new HashMap<>();
+        for (Lokaal l : rooms) {
+            bezet.put(l.getLokaalnummer(), Boolean.FALSE);
+        }
         List<Afspraak> afspraken = getAppointmentsToday();
         Calendar now = new GregorianCalendar();
         now.setTime(new Date());
         for (Afspraak afspraak : afspraken) {
-			if (afspraak.isDuring(now)) {
-				
-			}
-		}
-        return null;
+            if (afspraak.isDuring(now)) {
+                bezet.put(afspraak.getLokaal().getLokaalnummer(), Boolean.FALSE);
+            }
+        }
+        return bezet;
     }
 }
