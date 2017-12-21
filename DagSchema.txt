@@ -1,5 +1,5 @@
 ---------------------------------
-Room: HSR-Thames@ucll.be
+Room: Thames
 SUBJECT: Hakima Faik - student
 FROM: Thu Dec 21 11:00:00 CET 2017
 TILL: Thu Dec 21 13:30:00 CET 2017
@@ -7,7 +7,7 @@ SUBJECT: Valerie Aniol
 FROM: Thu Dec 21 14:30:00 CET 2017
 TILL: Thu Dec 21 16:30:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Yangtze@ucll.be
+Room: Yangtze
 SUBJECT: project 2TX
 FROM: Thu Dec 21 12:00:00 CET 2017
 TILL: Thu Dec 21 12:30:00 CET 2017
@@ -15,7 +15,7 @@ SUBJECT: ELKE STEEGMANS TEST
 FROM: Thu Dec 21 14:00:00 CET 2017
 TILL: Thu Dec 21 16:00:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Schelde@ucll.be
+Room: Schelde
 SUBJECT: scriptievergadering 
 FROM: Thu Dec 21 12:30:00 CET 2017
 TILL: Thu Dec 21 13:30:00 CET 2017
@@ -23,20 +23,23 @@ SUBJECT: WG internationale rekrutering
 FROM: Thu Dec 21 14:00:00 CET 2017
 TILL: Thu Dec 21 15:30:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Sarine@ucll.be
+Room: Sarine
 SUBJECT: Boris Van Ingelgom - student
 FROM: Thu Dec 21 09:00:00 CET 2017
 TILL: Thu Dec 21 18:00:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Rhone@ucll.be
+Room: Rhone
 SUBJECT: Micro: Andia Nikolla
 FROM: Thu Dec 21 12:30:00 CET 2017
 TILL: Thu Dec 21 13:30:00 CET 2017
+SUBJECT: Riet Goossens - student
+FROM: Thu Dec 21 14:00:00 CET 2017
+TILL: Thu Dec 21 15:00:00 CET 2017
 SUBJECT: Vrijhouden voor sollicitaties
 FROM: Thu Dec 21 15:00:00 CET 2017
 TILL: Thu Dec 21 17:00:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Po@ucll.be
+Room: Po
 SUBJECT: entretien d'embauche
 FROM: Thu Dec 21 12:00:00 CET 2017
 TILL: Thu Dec 21 13:00:00 CET 2017
@@ -47,7 +50,7 @@ SUBJECT: Dylan Millet - student
 FROM: Thu Dec 21 14:00:00 CET 2017
 TILL: Thu Dec 21 18:00:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Moselle@ucll.be
+Room: Moselle
 SUBJECT: commissie sociaal overleg
 FROM: Thu Dec 21 09:30:00 CET 2017
 TILL: Thu Dec 21 12:00:00 CET 2017
@@ -55,17 +58,20 @@ SUBJECT: Gerda Joris
 FROM: Thu Dec 21 13:00:00 CET 2017
 TILL: Thu Dec 21 15:00:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Ebro@ucll.be
+Room: Ebro
 SUBJECT: Kenzo De Cat - student
 FROM: Thu Dec 21 10:00:00 CET 2017
 TILL: Thu Dec 21 15:00:00 CET 2017
+SUBJECT: Koen Banckaert - student
+FROM: Thu Dec 21 15:00:00 CET 2017
+TILL: Thu Dec 21 22:00:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Maas@ucll.be
+Room: Maas
 SUBJECT: Evaluatie Verkoop 3FV
 FROM: Thu Dec 21 09:30:00 CET 2017
 TILL: Thu Dec 21 15:30:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Douro@ucll.be
+Room: Douro
 SUBJECT: Arne
 FROM: Thu Dec 21 08:15:00 CET 2017
 TILL: Thu Dec 21 09:15:00 CET 2017
@@ -76,7 +82,7 @@ SUBJECT: Vergadering Project 2
 FROM: Thu Dec 21 15:30:00 CET 2017
 TILL: Thu Dec 21 17:30:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Donau@ucll.be
+Room: Donau
 SUBJECT: Viktorien Geens - student
 FROM: Thu Dec 21 11:00:00 CET 2017
 TILL: Thu Dec 21 13:15:00 CET 2017
@@ -86,8 +92,11 @@ TILL: Thu Dec 21 14:15:00 CET 2017
 SUBJECT: Viktorien Geens - student
 FROM: Thu Dec 21 14:15:00 CET 2017
 TILL: Thu Dec 21 15:00:00 CET 2017
+SUBJECT: Bjarne Desmet - student
+FROM: Thu Dec 21 15:00:00 CET 2017
+TILL: Thu Dec 21 17:00:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Chao-Praya@ucll.be
+Room: Chao-Praya
 SUBJECT: Sollicitatie Rosy Nuyts
 FROM: Thu Dec 21 09:00:00 CET 2017
 TILL: Thu Dec 21 10:00:00 CET 2017
@@ -101,7 +110,7 @@ SUBJECT: Focusgesprek Frans 2 en Project Mgt Veerle
 FROM: Thu Dec 21 15:30:00 CET 2017
 TILL: Thu Dec 21 16:30:00 CET 2017
 ------------------------------------------------------------------
-Room: HSR-Arno@ucll.be
+Room: Arno
 SUBJECT: examen management opstellen
 FROM: Thu Dec 21 09:15:00 CET 2017
 TILL: Thu Dec 21 10:45:00 CET 2017
