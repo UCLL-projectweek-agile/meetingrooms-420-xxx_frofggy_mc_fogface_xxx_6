@@ -33,10 +33,10 @@
 					<li><a href="Servlet?action=index">Home</a></li>
 				</c:if>
 				<c:if test="${param.pageTitle == 'Timetable' }">
-					<li class="active"><a href="Servlet?action=current">Overzicht</a></li>
+					<li class="active"><a href="Servlet?action=timetable">Timetable</a></li>
 				</c:if>
 				<c:if test="${param.pageTitle != 'Timetable' }">
-					<li><a href="Servlet?action=current">Overzicht</a></li>
+					<li><a href="Servlet?action=timetable">Timetable</a></li>
 				</c:if>
 			</ul>
 		</div>
