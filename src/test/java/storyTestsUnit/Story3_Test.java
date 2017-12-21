@@ -1,5 +1,8 @@
 package storyTestsUnit;
 
+import db.EwsReservationsDb;
+import db.RoomInMemoryDb;
+import domain.Lokaal;
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -14,36 +17,29 @@ import org.junit.Before;
 import org.junit.Test;
 
 import meetingrooms.Service;
+import microsoft.exchange.webservices.data.core.ExchangeService;
+import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
+import microsoft.exchange.webservices.data.credential.WebCredentials;
 
 public class Story3_Test {
-	private File text;
-	private Scanner scnr;
-	private String bestandInhoud;
 
-	@Before
-	public void setUp() throws FileNotFoundException {
-		List<String> rooms = new ArrayList<>();
-        rooms.add("HSR-Yangtze@ucll.be");
-        rooms.add("HSR-Schelde@ucll.be");
-        rooms.add("HSR-Sarine@ucll.be");
-        rooms.add("HSR-Rhone@ucll.be");
-        rooms.add("HSR-Po@ucll.be");
-        rooms.add("HSR-Ebro@ucll.be");
-        rooms.add("HSR-Maas@ucll.be");
-        rooms.add("HSR-Douro@ucll.be");
-        rooms.add("HSR-Donau@ucll.be");
-        rooms.add("HSR-Chao-Praya@ucll.be");
-        rooms.add("HSR-Arno@ucll.be");
-        rooms.add("HSR-Thames@ucll.be");
-        rooms.add("HSR-Moselle@ucll.be");
-        
-		Service service = new Service(rooms);
-		service.printAppointmentsNow();
-		service.printAppointmentsToday();
+    private File text;
+    private Scanner scnr;
+    private String bestandInhoud;
 
-		text = new File("DagSchema.txt");
+    @Before
+    public void setUp() throws FileNotFoundException {
+        List<Lokaal> rooms = (new RoomInMemoryDb()).getRooms();
+        ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
+        ExchangeService exchange = new ExchangeService();
+        exchange.setCredentials(credentials);
+        Service service = new Service(rooms, new EwsReservationsDb(rooms, exchange));
+        service.printAppointmentsNow();
+        service.printAppointmentsToday();
 
-		scnr = new Scanner(text);
+        text = new File("DagSchema.txt");
+
+        scnr = new Scanner(text);
 
 //		// Reading each line of file using Scanner class
 //		int lineNumber = 1;
@@ -51,75 +47,73 @@ public class Story3_Test {
 //			String line = scnr.nextLine();
 //			bestandInhoud += scnr.nextLine();
 //		}
+    }
 
-	}
+    @Test
+    public void fileExists() throws FileNotFoundException {
+        // Service service = new Service();
+        // service.printAppointmentsToday();
 
-	@Test
-	public void fileExists() throws FileNotFoundException {
-		// Service service = new Service();
-		// service.printAppointmentsToday();
+        assertTrue(text.exists());
+    }
 
-		assertTrue(text.exists());
-	}
+    @Test
+    public void fileStructureCorrect() {
 
-	@Test
-	public void fileStructureCorrect() {
-		
-	}
-	
-		@Test
-		public void NoDuplicates() throws FileNotFoundException {
-		Boolean suc = true;	
-			
-		java.util.Map<String, Long> map = new HashMap<>();
-		ArrayList<String> mapke = new ArrayList();
-		Scanner read = new Scanner(text);
-		while (read.hasNext()) {
-	      String line = read.nextLine();
-	      mapke.add(line);
-	   }
-		if(Collections.frequency(mapke, "Room: HSR-Yangtze@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Schelde@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Sarine@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Rhone@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Po@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Ebro@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Maas@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Douro@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Donau@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Chao-Praya@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Arno@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Thames@ucll.be")>1){
-			suc =false;
-		}
-		if(Collections.frequency(mapke, "Room: HSR-Moselle@ucll.be")>1){
-			suc =false;
-		}
-	    assertTrue(suc);
-	    
-	    
-	}
+    }
+
+    @Test
+    public void NoDuplicates() throws FileNotFoundException {
+        Boolean suc = true;
+
+        java.util.Map<String, Long> map = new HashMap<>();
+        ArrayList<String> mapke = new ArrayList();
+        Scanner read = new Scanner(text);
+        while (read.hasNext()) {
+            String line = read.nextLine();
+            mapke.add(line);
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Yangtze@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Schelde@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Sarine@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Rhone@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Po@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Ebro@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Maas@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Douro@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Donau@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Chao-Praya@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Arno@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Thames@ucll.be") > 1) {
+            suc = false;
+        }
+        if (Collections.frequency(mapke, "Room: HSR-Moselle@ucll.be") > 1) {
+            suc = false;
+        }
+        assertTrue(suc);
+
+    }
 
 }

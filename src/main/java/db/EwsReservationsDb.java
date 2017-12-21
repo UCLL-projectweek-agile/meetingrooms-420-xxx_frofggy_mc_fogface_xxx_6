@@ -27,22 +27,16 @@ import microsoft.exchange.webservices.data.search.FindItemsResults;
  */
 public class EwsReservationsDb {
     
-    private final List<String> roomUrls;
+    private final List<Lokaal> rooms;
     private final ExchangeService service;
-    private final ExchangeCredentials credentials;
-    public EwsReservationsDb(List<String> roomUrls, ExchangeCredentials credentials){
-        this.roomUrls = roomUrls;
-        service = new ExchangeService();
-        this.credentials = credentials;
+    public EwsReservationsDb(List<Lokaal> rooms, ExchangeService service){
+        this.rooms = rooms;
+        this.service = service;
     }
     
     private void logIn(String room) throws Exception {
-        // user with read access for room information
-        //user gets privileges of room
         ImpersonatedUserId impersonatedUserId = new ImpersonatedUserId(ConnectingIdType.SmtpAddress, room);
         service.setImpersonatedUserId(impersonatedUserId);
-        service.setCredentials(credentials);
-        //find url to send request to (you can check: service.getUrl());
         service.autodiscoverUrl(room);
     }
     
@@ -61,7 +55,8 @@ public class EwsReservationsDb {
     
     public List<domain.Afspraak> findAllAppointments(Date startDate, Date endDate) throws Exception{
         List<domain.Afspraak> list = new ArrayList<>();
-        for(String r : roomUrls){
+        for(Lokaal room : rooms){
+            String r = room.getLokaalID();
             List<Appointment> apps = findAppointments(r, startDate, endDate);
             String rsub = r.substring(4);
             rsub = rsub.split("@")[0];
@@ -75,7 +70,8 @@ public class EwsReservationsDb {
     
     public List<Appointment> findAllEwsAppointments(Date startDate, Date endDate) throws Exception{
         List<Appointment> list = new ArrayList<>();
-        for(String r : roomUrls){
+        for(Lokaal room : rooms){
+            String r = room.getLokaalID();
             List<Appointment> apps = findAppointments(r, startDate, endDate);
             list.addAll(apps);
         }
