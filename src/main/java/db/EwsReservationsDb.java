@@ -72,4 +72,13 @@ public class EwsReservationsDb {
         }
         return list;
     }
+    
+    public List<Appointment> findAllEwsAppointments(Date startDate, Date endDate) throws Exception{
+        List<Appointment> list = new ArrayList<>();
+        for(String r : roomUrls){
+            List<Appointment> apps = findAppointments(r, startDate, endDate);
+            list.addAll(apps);
+        }
+        return list;
+    }
 }

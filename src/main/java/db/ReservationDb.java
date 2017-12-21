@@ -8,13 +8,12 @@ package db;
 import domain.Afspraak;
 import java.util.List;
 
-/**
- *
- * @author Daan
- */
 public interface ReservationDb {
+	
     
     public List<Afspraak> getReservations();
+    
+    public Afspraak getreservation(int id);
     
     public void addReservation(Afspraak afspraak);
     

@@ -10,4 +10,30 @@
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+  <context-param>
+  	<param-name>url</param-name>
+  	<param-value>
+  		jdbc:postgresql://databanken.ucll.be:51617/hakkaton
+  	</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>user</param-name>
+  	<param-value>hakkaton_06</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>currentSchema</param-name>
+  	<param-value>froggygroep6</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>ssl</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>password</param-name>
+  	<param-value>ceiG3raiquaikoht</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>sslfactory</param-name>
+  	<param-value>org.postgresql.ssl.NonValidatingFactory</param-value>
+  </context-param>
 </web-app>
