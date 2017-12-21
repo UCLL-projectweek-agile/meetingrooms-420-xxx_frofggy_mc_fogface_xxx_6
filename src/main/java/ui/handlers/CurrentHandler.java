@@ -38,11 +38,11 @@ public class CurrentHandler implements RequestHandler{
         try {
             //TODO
             appoints = service.findAllAppointments(startDate, endDate);
-            request.setAttribute("appointments", appoints);
+            request.setAttribute("afspraken", appoints);
         } catch (Exception ex) {
             Logger.getLogger(Servlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.getRequestDispatcher("currentoccupation.jsp").forward(request, response);
+        request.getRequestDispatcher("DemoTime.jsp").forward(request, response);
     }
 
     @Override

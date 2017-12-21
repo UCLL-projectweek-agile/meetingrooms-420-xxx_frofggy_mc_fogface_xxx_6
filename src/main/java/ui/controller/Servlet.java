@@ -74,6 +74,7 @@ public class Servlet extends HttpServlet {
 	
 	protected void verwerk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                 String req = request.getParameter("action");
+                req = (req == null) ? "index" : req;
 		try{
 			RequestHandler rq = this.requestHandlerFactory.create(req);
 			rq.handle(request, response);
