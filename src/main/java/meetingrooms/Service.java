@@ -16,6 +16,7 @@ import domain.Klant;
 import domain.Lokaal;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -214,8 +215,18 @@ public class Service {
     }
 
     public Map<String, String> getCurrentOccupation() {
+    	Map<String, Boolean> bezet = new HashMap<>();
+    	for (Afspraak afspraak : afspraken) {
+			
+		}
         List<Afspraak> afspraken = getAppointmentsToday();
-
+        Calendar now = new GregorianCalendar();
+        now.setTime(new Date());
+        for (Afspraak afspraak : afspraken) {
+			if (afspraak.isDuring(now)) {
+				
+			}
+		}
         return null;
     }
 }

@@ -210,6 +210,10 @@ public class Afspraak {
 		this.desc = desc;
 	}
 	
-	
+	public boolean isDuring(Calendar time) {
+		if (startDate == null || endDate == null) {
+			return false;
+		} return startDate.before(time) && endDate.after(time);
+	}
     
 }
