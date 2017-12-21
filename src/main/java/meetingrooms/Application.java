@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class Application {
 
-     public static void main(String[] args) throws Exception {
-         
+    public static void main(String[] args) throws Exception {
+
         List<String> rooms = new ArrayList<>();
         rooms.add("HSR-Yangtze@ucll.be");
         rooms.add("HSR-Schelde@ucll.be");
@@ -28,12 +28,12 @@ public class Application {
         rooms.add("HSR-Donau@ucll.be");
         rooms.add("HSR-Chao-Praya@ucll.be");
         rooms.add("HSR-Arno@ucll.be");
-         Service service = new Service(rooms);
-         //Daans work to get appointments for now
-         service.printAppointmentsNow();
-         //Arnolds work to get txt file for whole day
-         service.printAppointmentsToday();
-         
+        Service service = new Service(rooms);
+        //Daans work to get appointments for now
+        service.printAppointmentsNow();
+        //Arnolds work to get txt file for whole day
+        service.printAppointmentsToday();
+
     }
-    
+
 }

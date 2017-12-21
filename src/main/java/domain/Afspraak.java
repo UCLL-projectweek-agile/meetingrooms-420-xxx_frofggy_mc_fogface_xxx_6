@@ -24,6 +24,13 @@ public class Afspraak {
     private int startHour;
     private int endMinute;
     private int endHour;
+    
+    private int startYear;
+    private int startMonth;
+    private int startDay;
+    private int endYear;
+    private int endMonth;
+    private int endDay;
 
     public Afspraak(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
         this.setLokaal(lokaal);
@@ -34,6 +41,12 @@ public class Afspraak {
         this.setStartMinute();
         this.setEndHour();
         this.setEndMinute();
+        this.setStartYear();
+        this.setStartDay();
+        this.setStartMonth();
+        this.setEndYear();
+        this.setEndMonth();
+        this.setEndDay();
     }
     
 
@@ -84,7 +97,7 @@ public class Afspraak {
 
     @Override
     public String toString() {
-        return lokaal.toString() + " Start: " + startDate + " End: " + endDate;
+        return lokaal.toString() + " Start: " + startHour+":"+ startMinute + " End: " + endHour+":"+ endMinute;
     }
     
     public void setStartHour(){
@@ -118,4 +131,69 @@ public class Afspraak {
     public void setEndHour() {
         this.endHour = endDate.get(Calendar.HOUR_OF_DAY);
     }
+
+    
+    
+    
+    
+
+	public int getStartYear() {
+		return startYear;
+	}
+
+
+	public void setStartYear() {
+		this.startYear = startDate.get(Calendar.YEAR);
+	}
+
+
+	public int getStartMonth() {
+		return startMonth;
+	}
+
+
+	public void setStartMonth() {
+		this.startMonth = startDate.get(Calendar.MONTH);
+	}
+
+
+	public int getStartDay() {
+		return startDay;
+	}
+
+
+	public void setStartDay() {
+		this.startDay = startDate.get(Calendar.DAY_OF_MONTH);
+	}
+
+
+	public int getEndYear() {
+		return endYear;
+	}
+
+
+	public void setEndYear() {
+		this.endYear = endDate.get(Calendar.YEAR);
+	}
+
+
+	public int getEndMonth() {
+		return endMonth;
+	}
+
+
+	public void setEndMonth() {
+		this.endMonth = endDate.get(Calendar.MONTH);
+	}
+
+
+	public int getEndDay() {
+		return endDay;
+	}
+
+
+	public void setEndDay() {
+		this.endDay = endDate.get(Calendar.DAY_OF_MONTH);
+	}
+    
 }
