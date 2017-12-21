@@ -25,7 +25,7 @@
         //can update the fist parameter to the hour that is current later
         var date = new Date();
         var hour = date.getHours();
-        timetable.setScope(hour, 23)
+        timetable.setScope(7, 23)
         //this will hold the different spaces -- Name of the river
         //static
        
