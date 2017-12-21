@@ -7,7 +7,7 @@
     </jsp-property-group>
   </jsp-config>
   <welcome-file-list>
-    <welcome-file>Servlet?action=index</welcome-file>
+    <welcome-file>/Servlet?action=index</welcome-file>
   </welcome-file-list>
   <context-param>
   	<param-name>url</param-name>
