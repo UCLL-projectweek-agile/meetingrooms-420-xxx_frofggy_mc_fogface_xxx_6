@@ -14,9 +14,9 @@ import microsoft.exchange.webservices.data.core.PropertySet;
  * @author Daan
  */
 public class Afspraak {
-
+	
     private Lokaal lokaal;
-    
+    private String desc;
     private Calendar startDate;
     private Calendar endDate;
     
@@ -31,12 +31,15 @@ public class Afspraak {
     private int endYear;
     private int endMonth;
     private int endDay;
+    
+    
 
     public Afspraak(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
         this.setLokaal(lokaal);
         appt.load(PropertySet.FirstClassProperties);
         this.setStartDate(toCalendar(appt.getStart()));
         this.setEndDate(toCalendar(appt.getEnd()));
+        this.setDesc(appt.getSubject());
         this.setStartHour();
         this.setStartMinute();
         this.setEndHour();
@@ -195,5 +198,17 @@ public class Afspraak {
 	public void setEndDay() {
 		this.endDay = endDate.get(Calendar.DAY_OF_MONTH);
 	}
+
+
+	public String getDesc() {
+		return desc;
+	}
+
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	
+	
     
 }
