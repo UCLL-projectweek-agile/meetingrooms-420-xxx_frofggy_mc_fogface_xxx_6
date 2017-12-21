@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import domain.Afspraak;
 import domain.Klant;
@@ -237,4 +238,10 @@ public class Service {
         }
         return new ArrayList<domain.Afspraak>();
     }
+
+	public Map<String, String> getCurrentOccupation() {
+		List<Afspraak> afspraken = printAppointmentsvoorWeb();
+		
+		return null;
+	}
 }
