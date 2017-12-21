@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
 import microsoft.exchange.webservices.data.credential.WebCredentials;
 import ui.handlers.RequestHandler;
@@ -36,8 +37,10 @@ public class Servlet extends HttpServlet {
 
         List<Lokaal> rooms = (new RoomInMemoryDb()).getRooms();
         ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
-        db = new EwsReservationsDb(rooms, credentials);
-        service = new Service(rooms);
+        ExchangeService exchange = new ExchangeService();
+        exchange.setCredentials(credentials);
+        db = new EwsReservationsDb(rooms, exchange);
+        service = new Service(rooms, db);
         requestHandlerFactory = new RequestHandlerFactory(service);
     }
 

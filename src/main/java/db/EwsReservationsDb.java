@@ -29,20 +29,14 @@ public class EwsReservationsDb {
     
     private final List<Lokaal> rooms;
     private final ExchangeService service;
-    private final ExchangeCredentials credentials;
-    public EwsReservationsDb(List<Lokaal> rooms, ExchangeCredentials credentials){
+    public EwsReservationsDb(List<Lokaal> rooms, ExchangeService service){
         this.rooms = rooms;
-        service = new ExchangeService();
-        this.credentials = credentials;
+        this.service = service;
     }
     
     private void logIn(String room) throws Exception {
-        // user with read access for room information
-        //user gets privileges of room
         ImpersonatedUserId impersonatedUserId = new ImpersonatedUserId(ConnectingIdType.SmtpAddress, room);
         service.setImpersonatedUserId(impersonatedUserId);
-        service.setCredentials(credentials);
-        //find url to send request to (you can check: service.getUrl());
         service.autodiscoverUrl(room);
     }
     
