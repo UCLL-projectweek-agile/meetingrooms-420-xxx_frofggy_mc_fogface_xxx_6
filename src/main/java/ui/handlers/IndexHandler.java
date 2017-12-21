@@ -6,6 +6,8 @@
 package ui.handlers;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,15 +19,16 @@ import meetingrooms.Service;
  */
 @Mapping("index")
 public class IndexHandler implements RequestHandler{
-
+private Service service;
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("index.jsp").forward(request,response);
+       Map<String, String> lokalenKleuren = service.getCurrentOccupation();
+    	request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 
     @Override
     public void setModel(Service model) {
-        
+        service = model;
     }
     
 }
