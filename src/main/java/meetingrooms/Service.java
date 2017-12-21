@@ -1,6 +1,7 @@
 package meetingrooms;
 
 import db.EwsReservationsDb;
+import db.ReservationDb;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -13,9 +14,10 @@ import java.util.Map;
 import domain.Afspraak;
 import domain.Klant;
 import domain.Lokaal;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import microsoft.exchange.webservices.data.core.ExchangeService;
 import microsoft.exchange.webservices.data.core.PropertySet;
@@ -48,6 +50,7 @@ public class Service {
     private List<Afspraak> afspraken;
     private double lastChecked;
     private final EwsReservationsDb db;
+    private ReservationDb reservationDb;
 
     public Service(List<String> rooms) {
         this.rooms = rooms;
@@ -65,28 +68,6 @@ public class Service {
         service.setCredentials(credentials);
         //find url to send request to (you can check: service.getUrl());
         service.autodiscoverUrl(room);
-    }
-
-    public void findAppointments(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
-
-        //binds to the calendar folder of the room
-        Mailbox mailbox = new Mailbox(room);
-        FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
-        CalendarFolder calendarFolder = CalendarFolder.bind(service, folderId);
-        //read calendar of room
-        CalendarView calendarView = new CalendarView(startDate, endDate);
-        FindItemsResults<Appointment> findResults
-                = calendarFolder.findAppointments(calendarView);
-        System.out.println("---------------------------------");
-        System.out.println("Room: " + room);
-        for (Appointment appt : findResults.getItems()) {
-            appt.load(PropertySet.FirstClassProperties);
-            System.out.println("SUBJECT: " + appt.getSubject());
-            System.out.println("FROM: " + appt.getStart());
-            System.out.println("TILL: " + appt.getEnd());
-            Klant klant = new Klant(appt.getSubject(), appt.getStart(), appt.getEnd());
-        }
-        System.out.println("---------------------------------");
     }
 
     public List<Afspraak> findAppointments2(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
@@ -112,19 +93,21 @@ public class Service {
         return afspraken;
     }
 
-    public String stringFindAppointments(String room, ExchangeService service, Date startDate, Date endDate) throws Exception {
+    public List<String> stringFindAppointments(ExchangeService service, Date startDate, Date endDate) throws Exception {
 
-        String appointment = "";
-        Mailbox mailbox = new Mailbox(room);
-        FolderId folderId = new FolderId(WellKnownFolderName.Calendar, mailbox);
-        CalendarFolder calendarFolder = CalendarFolder.bind(service, folderId);
-        //read calendar of room
-        CalendarView calendarView = new CalendarView(startDate, endDate);
-        FindItemsResults<Appointment> findResults
-                = calendarFolder.findAppointments(calendarView);
-        appointment += "---------------------------------\n";
+        List<String> string = new ArrayList<>();
+        for (String room : rooms) {
+            string.add(stringFindAppointmentsForRoom(room, startDate, endDate));
+        }
+        return string;
+    }
+
+    private String stringFindAppointmentsForRoom(String room, Date startDate, Date endDate) throws Exception {
+        String appointment;
+        List<Appointment> findResults = db.findAppointments(room, startDate, endDate);
+        appointment = "---------------------------------\n";
         appointment += "Room: " + room + "\n";
-        for (Appointment appt : findResults.getItems()) {
+        for (Appointment appt : findResults) {
             appt.load(PropertySet.FirstClassProperties);
             appointment += "SUBJECT: " + appt.getSubject() + "\n";
             appointment += "FROM: " + appt.getStart() + "\n";
@@ -138,44 +121,38 @@ public class Service {
     public void printAppointmentsNow() {
 
         ExchangeService service = new ExchangeService();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = new Date();
         Date endDate = new Date();
         endDate.setTime(endDate.getTime() + 3600000);
 
-        for (String r : rooms) {
-            try {
-                logIn(r, service);
-                findAppointments(r, service, startDate, endDate);
-            } catch (Exception e) {
-
+        try {
+            for (String s : this.stringFindAppointments(service, startDate, endDate)) {
+                System.out.println(s);
             }
+        } catch (Exception ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public List<Afspraak> printAppointmentsvoorWeb() {
+    public List<Afspraak> getAppointmentsToday() {
         double now = new Date().getTime();
         if (afspraken != null && (now - lastChecked) < 60000) {
             return afspraken;
         } else {
             lastChecked = now;
 
-            ExchangeService service = new ExchangeService();
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date startDate = new Date();
-            Date endDate = new Date();
-            endDate.setTime(endDate.getTime() + 3600000);
-            List<Afspraak> roomse = new ArrayList<>();
+            Calendar calStart = getMidnightYesterday();
+            Date midnightYesterday = calStart.getTime();
 
-            for (String r : rooms) {
-                try {
-                    logIn(r, service);
-                    roomse.addAll(findAppointments2(r, service, startDate, endDate));
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
+            Calendar calEnd = getMidnightToday();
+            Date midnightTonight = calEnd.getTime();
+
+            List<Afspraak> roomse = new ArrayList<>();
+            try {
+                afspraken = db.findAllAppointments(midnightYesterday, midnightTonight);
+            } catch (Exception ex) {
+                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
             }
-            afspraken = roomse;
             return roomse;
         }
     }
@@ -189,59 +166,56 @@ public class Service {
         }
         ExchangeService service = new ExchangeService();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date startDate = new Date();
-        Date endDate = new Date();
-        startDate.setHours(0);
-        startDate.setMinutes(0);
-        startDate.setSeconds(0);
 
-        endDate.setHours(23);
-        endDate.setMinutes(59);
-        endDate.setSeconds(59);
+        Calendar calStart = getMidnightYesterday();
+        Date midnightYesterday = calStart.getTime();
 
-        for (String r : rooms) {
-            try {
-                logIn(r, service);
-                p.write(stringFindAppointments(r, service, startDate, endDate));
-            } catch (Exception e) {
+        Calendar calEnd = getMidnightToday();
+        Date midnightTonight = calEnd.getTime();
 
+        try {
+            for (String r : stringFindAppointments(service, midnightYesterday, midnightTonight)) {
+                p.write(r);
             }
+        } catch (Exception ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         p.close();
     }
 
-    public List<domain.Afspraak> getCurrentAppointments() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Calendar getMidnightToday() {
+        Calendar calEnd = new GregorianCalendar();
+        calEnd.setTime(new Date());
+        calEnd.set(Calendar.DAY_OF_YEAR, calEnd.get(Calendar.DAY_OF_YEAR) + 1);
+        calEnd.set(Calendar.HOUR_OF_DAY, 0);
+        calEnd.set(Calendar.MINUTE, 0);
+        calEnd.set(Calendar.SECOND, 0);
+        calEnd.set(Calendar.MILLISECOND, 0);
+        return calEnd;
     }
 
-    public void printLokaal(String r) {
-
-        ExchangeService service = new ExchangeService();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date startDate = new Date();
-        Date endDate = new Date();
-        endDate.setTime(endDate.getTime() + 3600000);
-
-        try {
-            logIn(r, service);
-            findAppointments(r, service, startDate, endDate);
-        } catch (Exception e) {
-
-        }
+    private Calendar getMidnightYesterday() {
+        Calendar calStart = new GregorianCalendar();
+        calStart.setTime(new Date());
+        calStart.set(Calendar.HOUR_OF_DAY, 0);
+        calStart.set(Calendar.MINUTE, 0);
+        calStart.set(Calendar.SECOND, 0);
+        calStart.set(Calendar.MILLISECOND, 0);
+        return calStart;
     }
 
     public List<domain.Afspraak> findAllAppointments(Date startDate, Date endDate) {
         try {
             return db.findAllAppointments(startDate, endDate);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new ArrayList<domain.Afspraak>();
+        return null;
     }
 
-	public Map<String, String> getCurrentOccupation() {
-		List<Afspraak> afspraken = printAppointmentsvoorWeb();
-		
-		return null;
-	}
+    public Map<String, String> getCurrentOccupation() {
+        List<Afspraak> afspraken = getAppointmentsToday();
+
+        return null;
+    }
 }
