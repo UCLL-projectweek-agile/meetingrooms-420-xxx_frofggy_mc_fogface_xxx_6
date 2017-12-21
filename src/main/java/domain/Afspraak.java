@@ -39,7 +39,6 @@ public class Afspraak {
     private int endMonth;
     private int endDay;
     
-<<<<<<< HEAD
     public Afspraak(int afspraakid, String lokaalid, Date startdate, Date enddate, String subject){
     	this.setAfspraakid(afspraakid);
     	this.setLokaalid(lokaalid);
@@ -47,10 +46,6 @@ public class Afspraak {
     	this.setEndDate(toCalendar(enddate));
     	this.setSubject(subject);
     }
-=======
-    
-    
->>>>>>> 0eca2c0c4f422ef5c517991b55c86ed36f264310
 
     public Afspraak(Lokaal lokaal, microsoft.exchange.webservices.data.core.service.item.Appointment appt) throws Exception {
         this.setLokaal(lokaal);
