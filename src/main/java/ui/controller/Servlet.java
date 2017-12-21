@@ -52,6 +52,8 @@ public class Servlet extends HttpServlet {
         rooms.add("HSR-Donau@ucll.be");
         rooms.add("HSR-Chao-Praya@ucll.be");
         rooms.add("HSR-Arno@ucll.be");
+        rooms.add("HSR-Thames@ucll.be");
+        rooms.add("HSR-Moselle@ucll.be");
         ExchangeCredentials credentials = new WebCredentials("sa_uurrooster", "JLxkK4BDUre3");
         db = new EwsReservationsDb(rooms, credentials);
         service = new Service(rooms);
