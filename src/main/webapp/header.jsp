@@ -16,7 +16,7 @@
 	<script src="./js/jquery.maphilight.js" type="text/javascript"></script>
 	<script src="./js/hilight.js" type="text/javascript"></script>
 	<title>${param.pageTitle }</title>
-	<c:if test="${param.pageTitle == 'Timetable' }">
+	<c:if test="${param.pageTitle == 'Timetable' || param.pageTitle == 'Home' }">
 	<link rel="stylesheet" href="css/demo.css">
 	</c:if>
 
