@@ -6,8 +6,9 @@
 	<jsp:param value="Home" name="pageTitle"/>
 </jsp:include>
 
-
-<div class="timetable"><div style="margin:auto"></div></div>
+  
+  <div class="row">
+    <div class="timetable"><div style="margin:auto"></div></div>
 	<script src="js/timetable.js"></script>
 	<div id="afspraak">
 		<c:forEach var="afspraak" items="${afspraken}">
@@ -44,7 +45,11 @@
         renderer.draw('.timetable');
         //CopyRight goes to Grible, no site only github: //https://github.com/Grible/timetable.js
     </script>
-<div class="container-fluid no-padding">
+    </div>
+   
+
+
+<div class="container-fluid no-padding" style="padding-top: 5em">
   <div class="row">
     <div class="col-md-12">
    
@@ -70,6 +75,7 @@
 </div>
 
 <script type="text/javascript">
+		window.onresize = function(){ location.reload(); }
 		$('map').imageMapResize();
 </script>
 

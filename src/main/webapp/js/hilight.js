@@ -7,7 +7,7 @@ $(document).ready(function() {
 	var data = {};
 	$('.map').maphilight();
 	data.alwaysOn = true;
-	data.fillColor = '00ff00';
+	data.fillColor = 'dddddd';
 	data.fillOpacity = '0.6';
 	$('.green').data('maphilight', data).trigger('alwaysOn.maphilight');
 });
