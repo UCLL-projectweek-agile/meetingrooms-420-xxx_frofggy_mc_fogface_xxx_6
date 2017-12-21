@@ -34,7 +34,9 @@ public class Story3_Test {
         rooms.add("HSR-Donau@ucll.be");
         rooms.add("HSR-Chao-Praya@ucll.be");
         rooms.add("HSR-Arno@ucll.be");
-		
+        rooms.add("HSR-Thames@ucll.be");
+        rooms.add("HSR-Moselle@ucll.be");
+        
 		Service service = new Service(rooms);
 		service.printAppointmentsNow();
 		service.printAppointmentsToday();
