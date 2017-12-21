@@ -27,11 +27,4 @@ background-color: green;
 <area shape="rect" coords="1420,267,1422,269" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />
 </map>
 
- 	<div class="panel-footer">
- 
-        <p>&copy; Company | Privacy | Terms</p>
- 
-      </div>
-</body>
-
-</html>
+<jsp:include page="footer.jsp"></jsp:include>
