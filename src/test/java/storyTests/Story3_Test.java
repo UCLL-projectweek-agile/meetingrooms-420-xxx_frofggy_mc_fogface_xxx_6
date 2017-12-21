@@ -111,7 +111,12 @@ public class Story3_Test {
 		if(Collections.frequency(mapke, "Room: HSR-Arno@ucll.be")>1){
 			suc =false;
 		}
-		
+		if(Collections.frequency(mapke, "Room: HSR-Thames@ucll.be")>1){
+			suc =false;
+		}
+		if(Collections.frequency(mapke, "Room: HSR-Moselle@ucll.be")>1){
+			suc =false;
+		}
 	    assertTrue(suc);
 	    
 	    
