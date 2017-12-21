@@ -218,7 +218,7 @@ public class Service {
         now.setTime(new Date());
         for (Afspraak afspraak : afspraken) {
             if (afspraak.isDuring(now)) {
-                bezet.put(afspraak.getLokaal().getLokaalnummer(), Boolean.FALSE);
+                bezet.put(afspraak.getLokaal().getLokaalnummer(), Boolean.TRUE);
             }
         }
         return bezet;
