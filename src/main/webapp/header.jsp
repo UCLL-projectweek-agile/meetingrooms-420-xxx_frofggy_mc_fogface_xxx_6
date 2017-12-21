@@ -10,6 +10,7 @@
   <script src="https://code.jquery.com/jquery-3.1.1.js" type="text/javascript"></script>
 <script src= "./js/jquery.maphilight.js" type="text/javascript"></script>
 <script src= "./js/hilight.js" type="text/javascript"></script>
+<script src= "./js/imageMapResizer.js" type="text/javascript"></script>
 </head>
 <body>
 
