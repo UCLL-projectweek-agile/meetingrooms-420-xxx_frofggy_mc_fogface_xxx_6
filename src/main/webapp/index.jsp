@@ -19,7 +19,8 @@ background-color: green;
 <area class="red" id="D155" alt="" title="D155" href="http://www.image-maps.com/" shape="rect" coords="387,151,574,269" style="outline:none;" target="_self"     />
 <area class="red" id="D153" alt="" title="D153" href="http://www.image-maps.com/" shape="rect" coords="579,11,764,269" style="outline:none;" target="_self"     />
 <area class="green" id="D149" alt="" title="D149" href="http://www.image-maps.com/" shape="rect" coords="772,15,920,145" style="outline:none;" target="_self"     />
-<area class="red" id="D148" alt="" title="D148" href="http://www.image-maps.com/" shape="rect" coords="771,150,959,269" style="outline:none;" target="_self"     />
+<area class="red" id="D14
+8" alt="" title="D148" href="http://www.image-maps.com/" shape="rect" coords="771,150,959,269" style="outline:none;" target="_self"     />
 <area class="green" id="D146" alt="" title="D146" href="http://www.image-maps.com/" shape="rect" coords="1007,10,1107,145" style="outline:none;" target="_self"     />
 <area class="red" id="D145" alt="" title="D145" href="http://www.image-maps.com/" shape="rect" coords="963,151,1150,268" style="outline:none;" target="_self"     />
 <area class="red" id="D143" alt="" title="D143" href="http://www.image-maps.com/" shape="rect" coords="1195,15,1344,146" style="outline:none;" target="_self"     />
