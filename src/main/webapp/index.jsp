@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-md-12">
    
-      <img class="map img-responsive" src="./images/mapLokalen.PNG" border="0" width="100%" usemap="#image-maps-2017-12-20-045103" alt="" />
+ <img class="map img-responsive" src="./images/mapLokalen.PNG" border="0" usemap="#image-maps-2017-12-20-045103" alt="" />
 <map name="image-maps-2017-12-20-045103" id="ImageMapsCom-image-maps-2017-12-20-045103">
 <area class="${D160}" id="D160" alt="" title="D160" href="#" shape="rect" coords="2,14,151,145" style="outline:none;" target="_self"     />
 <area class="${D159}" id="D159" alt="" title="D159" href="#" shape="rect" coords="2,151,191,269" style="outline:none;" target="_self"     />
@@ -31,7 +31,6 @@
     </div>
   </div>
 </div>
-
 
 <script type="text/javascript">
 		$('map').imageMapResize();
