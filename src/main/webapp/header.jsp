@@ -12,9 +12,9 @@
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/6a6b824a28.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.js" type="text/javascript"></script>
+	<script src="./js/imageMapResizer.js" type="text/javascript"></script>
 	<script src="./js/jquery.maphilight.js" type="text/javascript"></script>
 	<script src="./js/hilight.js" type="text/javascript"></script>
-	<script src="./js/imageMapResizer.js" type="text/javascript"></script>
 	<title>${param.pageTitle }</title>
 	<c:if test="${param.pageTitle == 'Timetable' }">
 	<link rel="stylesheet" href="css/demo.css">
