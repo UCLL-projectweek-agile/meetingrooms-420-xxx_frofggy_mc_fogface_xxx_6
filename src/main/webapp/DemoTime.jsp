@@ -26,7 +26,8 @@
 		endHour="${afspraak.endHour }"
 		startMinute="${afspraak.startMinute }"
 		endMinute="${afspraak.endMinute }"
-		lokaal="${afspraak.lokaal }"></afspraak>
+		lokaal="${afspraak.lokaal }"
+		description="${afspraak.desc }"></afspraak>
 	</c:forEach>
 	</div>
     <script>
@@ -44,23 +45,9 @@
 		var x = document.getElementById("afspraak").children
 		console.log(x);
 		for (var i = 0; i < x.length; i++) {
-       	timetable.addEvent(x[i].getAttribute('lokaal'), x[i].getAttribute('lokaal'), new Date(x[i].getAttribute('startYear'),x[i].getAttribute('startMonth'),x[i].getAttribute('startDay'), x[i].getAttribute('startHour'),x[i].getAttribute('startMinute')), 
+       	timetable.addEvent(x[i].getAttribute('description'), x[i].getAttribute('lokaal'), new Date(x[i].getAttribute('startYear'),x[i].getAttribute('startMonth'),x[i].getAttribute('startDay'), x[i].getAttribute('startHour'),x[i].getAttribute('startMinute')), 
        			new Date(x[i].getAttribute('endYear'),x[i].getAttribute('endMonth'),x[i].getAttribute('endDay'), x[i].getAttribute('endHour'),x[i].getAttribute('endMinute')));
 		}
-        
-        
-        
-        
-        
-        
-        
-        //timetable.addEvent('Reservering 2', 'Arno', new Date(2015, 7, 17, 16, 00), new Date(2015, 7, 17, 18, 30));
-        //timetable.addEvent('Reservering 3', 'Po', new Date(2015, 7, 17, 10, 00), new Date(2015, 7, 17, 11, 00));
-        //timetable.addEvent('Reservering 4', 'Schelde', new Date(2015, 7, 17, 17, 00), new Date(2015, 7, 17, 17, 30));
-        //timetable.addEvent('Reservering 5', 'Donau', new Date(2015, 7, 17, 12, 00), new Date(2015, 7, 17, 14, 30));
-        //timetable.addEvent('Reservering 6', 'Arno', new Date(2015, 7, 17, 9, 00), new Date(2015, 7, 17, 9, 30));
-        //timetable.addEvent('Reservering 7', 'Po', new Date(2015, 7, 17, 17, 00), new Date(2015, 7, 17, 17, 30));
-        //timetable.addEvent('Reservering 8', 'Schelde', new Date(2015, 7, 17, 16, 00), new Date(2015, 7, 17, 16, 30));
         var renderer = new Timetable.Renderer(timetable);
         renderer.draw('.timetable');
         //CopyRight goes to Grible, no site only github: //https://github.com/Grible/timetable.js
